@@ -2,4 +2,4 @@
 
 ## Requirements
 
-Unity 2020.3.4f1 (be sure to install the WebGL Unity component)
+Unity 2020.3.6f1 (be sure to install the WebGL Unity component)
