@@ -42,6 +42,7 @@ public class Waypoints : MonoBehaviour
         // empty 
         {
             Debug.Log("Finished Race!");
+            GameController.Instance?.OnFinishRace();
             SendMessageUpwards("OnFinishRace", null, SendMessageOptions.DontRequireReceiver);
         }
     }

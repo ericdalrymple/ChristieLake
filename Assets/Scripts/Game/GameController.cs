@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Assertions;
 
 public class GameController
@@ -14,7 +15,6 @@ public class GameController
 
     [SerializeField]
     private UIManager m_UIManager;
-
 
     [Header("Config")]
 
@@ -82,6 +82,34 @@ public class GameController
         m_Camera = Camera.main;
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
         playerTracker.trackedObject = m_Player;
+        StartGame();
+    }
 
+
+    public void StartGame()
+    {
+        m_Session.Reset();
+        Debug.Log("Start race! Scene: " + SceneManager.GetActiveScene().ToString());
+
+    }
+
+
+    public void OnFinishRace()
+    {
+        WinGame();
+    }
+
+
+    public void WinGame()
+    {
+        Debug.Log("Race time: " + m_Session);
+        ResetGame();
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        StartGame();
     }
 }
