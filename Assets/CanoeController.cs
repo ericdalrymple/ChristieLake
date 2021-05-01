@@ -28,13 +28,13 @@ public class CanoeController : MonoBehaviour
         if (Input.GetKey("a"))
         {
             rb.AddForce(speed * Vector3.forward);
-            rb.AddTorque(transform.up * torque * 1);
+            rb.AddTorque(transform.up * torque * 1f);
         }
 
         if (Input.GetKey("d"))
         {
             rb.AddForce(speed * Vector3.forward);
-            rb.AddTorque(transform.up * torque * -1);
+            rb.AddTorque(transform.up * torque * -1f);
         }
     }
 }
