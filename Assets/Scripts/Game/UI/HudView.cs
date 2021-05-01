@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class HudView : UIView
+public class HudView : UIView<IdleState>
 {
     private void Awake()
     {

@@ -5,11 +5,11 @@ using UnityEngine;
 public class UIViewCollection : MonoBehaviour
 {
     [SerializeField]
-    private UIView[] m_Views = new UIView[0];
+    private BaseUIView[] m_Views = new BaseUIView[0];
 
     void Awake()
     {
-        foreach (UIView view in m_Views)
+        foreach (BaseUIView view in m_Views)
         {
             GameController.UIManager.Register(view);
         }
@@ -17,7 +17,7 @@ public class UIViewCollection : MonoBehaviour
 
     void OnDestroy()
     {
-        foreach (UIView view in m_Views)
+        foreach (BaseUIView view in m_Views)
         {
             GameController.UIManager.Unregister(view);
         }

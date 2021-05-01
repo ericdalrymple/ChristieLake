@@ -6,21 +6,20 @@ using UnityEngine.Assertions;
 
 public class UIManager : MonoBehaviour
 {
-    private Dictionary<string, UIView> m_ViewLookup = new Dictionary<string, UIView>();
+    private Dictionary<string, BaseUIView> m_ViewLookup = new Dictionary<string, BaseUIView>();
 
-    private Stack<UIView> m_NavigationStack = new Stack<UIView>();
+    private Stack<BaseUIView> m_NavigationStack = new Stack<BaseUIView>();
 
-    private UIView CurrentDialog
+    private BaseUIView CurrentDialog
     {
         get
         {
-            UIView dialog = null;
             if (m_NavigationStack.Count > 0)
             {
                 return m_NavigationStack.Peek();
             }
 
-            return dialog;
+            return null;
         }
     }
 
@@ -50,17 +49,17 @@ public class UIManager : MonoBehaviour
         CurrentDialog?.Show();
     }
 
-    public void Register(UIView view)
+    public void Register(BaseUIView view)
     {
         m_ViewLookup.Add(view.Handle, view);
     }
 
-    public void Unregister(UIView view)
+    public void Unregister(BaseUIView view)
     {
         m_ViewLookup.Remove(view.Handle);
     }
 
-    public UIView ShowDialog(UIHandle viewHandle)
+    public BaseUIView ShowDialog(UIHandle viewHandle, IUIController controller)
     {
         if (viewHandle == null)
         {
@@ -68,20 +67,21 @@ public class UIManager : MonoBehaviour
             return null;
         }
 
-        UIView dialog;
-        Assert.IsTrue(m_ViewLookup.TryGetValue(viewHandle.Value, out dialog), $"No registered dialog with handle '{viewHandle}'.");
+        BaseUIView view;
+        Assert.IsTrue(m_ViewLookup.TryGetValue(viewHandle.Value, out view), $"No registered dialog with handle '{viewHandle}'.");
 
-        if ((dialog != null) && (dialog != CurrentDialog))
+        if ((view != null) && (view != CurrentDialog))
         {
-            dialog.Show();
+            view.Controller = controller;
+            view.Show();
 
-            if (dialog.PushToNavigationStack && CurrentDialog != dialog)
+            if (view.PushToNavigationStack && CurrentDialog != view)
             {
-                m_NavigationStack.Push(dialog);
+                m_NavigationStack.Push(view);
             }
         }
 
-        return dialog;
+        return view;
     }
 
     private bool PopInvalidViews()

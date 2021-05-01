@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : GameState
+public class IdleState : GameState, IUIController
 {
     [SerializeField]
     private UIHandle m_HudHandle;
 
     public override void Enter()
     {
-        GameController.UIManager.ShowDialog(m_HudHandle);
+        GameController.UIManager.ShowDialog(m_HudHandle, this);
     }
 
     public override void Exit() { }
