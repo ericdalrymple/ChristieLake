@@ -38,7 +38,8 @@ public class GameController : SingletonBehaviour<GameController>
         Assert.IsNotNull(m_UIManager, "Must specify a UIManager.");
         Assert.IsNotNull(m_Player, "Must pass ref to the player");
         m_Camera = Camera.main;
-
+        PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
+        playerTracker.trackedObject = m_Player;
 
     }
 }

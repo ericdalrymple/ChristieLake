@@ -19,13 +19,19 @@ public class CanoeController : MonoBehaviour
     [SerializeField]
     InputActionAsset inputActionAsset;
 
+    [SerializeField]
+    public Transform target;
+
+
     InputAction rowLeft;
     InputAction rowRight;
+
+    
     // Start is called before the first frame update
     void Awake()
     {
         Assert.IsNotNull(inputActionAsset, "Need inputActionAsset");
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInChildren<Rigidbody>();
 
         var gameplayActionMap = inputActionAsset.FindActionMap("Player");
 
