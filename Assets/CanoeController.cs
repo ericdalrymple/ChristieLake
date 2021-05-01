@@ -67,21 +67,16 @@ public class CanoeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKey("a"))
-        {
-            rb.AddForce(speed.Value * Vector3.forward);
-            rb.AddTorque(transform.up * torque.Value * 1f);
-        }
-
-        if (Input.GetKey("d"))
-        {
-            rb.AddForce(speed.Value * Vector3.forward);
-            rb.AddTorque(transform.up * torque.Value * -1f);
-        }
-        */
+        print(IsUpsideDown());
     }
 
+
+    private bool IsUpsideDown()
+    {
+
+        return Vector3.Dot(transform.up, Vector3.up) < -.9;
+
+    }
     public void OnRowLeft(InputAction.CallbackContext context)
     {
         print("Row Left");
