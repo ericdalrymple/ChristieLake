@@ -14,18 +14,28 @@ public class CanoeController : MonoBehaviour
     FloatReference speed = new FloatReference(1.0f);
 
     [SerializeField]
+    FloatReference lateralSpeed = new FloatReference(1.0f);
+
+    [SerializeField]
     FloatReference torque = new FloatReference(1.0f);
-    
+
+
     [SerializeField]
     InputActionAsset inputActionAsset;
 
+    [SerializeField]
+    public Transform target;
+
+
     InputAction rowLeft;
     InputAction rowRight;
+
+    
     // Start is called before the first frame update
     void Awake()
     {
         Assert.IsNotNull(inputActionAsset, "Need inputActionAsset");
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInChildren<Rigidbody>();
 
         var gameplayActionMap = inputActionAsset.FindActionMap("Player");
 
@@ -57,32 +67,29 @@ public class CanoeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKey("a"))
-        {
-            rb.AddForce(speed.Value * Vector3.forward);
-            rb.AddTorque(transform.up * torque.Value * 1f);
-        }
-
-        if (Input.GetKey("d"))
-        {
-            rb.AddForce(speed.Value * Vector3.forward);
-            rb.AddTorque(transform.up * torque.Value * -1f);
-        }
-        */
+        print(IsUpsideDown());
     }
 
+
+    private bool IsUpsideDown()
+    {
+
+        return Vector3.Dot(transform.up, Vector3.up) < -.9;
+
+    }
     public void OnRowLeft(InputAction.CallbackContext context)
     {
         print("Row Left");
-        rb.AddForce(speed.Value * Vector3.forward);
+        rb.AddForce(speed.Value * transform.forward);
+        rb.AddForce(0.2f * speed.Value * transform.right);
         rb.AddTorque(transform.up * torque.Value * 1f);
     }
 
     public void OnRowRight(InputAction.CallbackContext context)
     {
         print("Row Right");
-        rb.AddForce(speed.Value * Vector3.forward);
+        rb.AddForce(speed.Value * transform.forward);
+        rb.AddForce(0.2f * speed.Value * transform.right * -1);
         rb.AddTorque(transform.up * torque.Value * -1f);
     }
 }
