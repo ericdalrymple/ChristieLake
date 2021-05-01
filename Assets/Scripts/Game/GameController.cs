@@ -1,10 +1,14 @@
 using PocketValues.Types;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class GameController : SingletonBehaviour<GameController>, IHudController
+public class GameController
+    : SingletonBehaviour<GameController>
+    , IHudController
+    , IResultsController
 {
     [Header("Subsystems")]
 
@@ -26,6 +30,8 @@ public class GameController : SingletonBehaviour<GameController>, IHudController
     [SerializeField]
     private Camera m_Camera;
 
+    private GameSession m_Session;
+
     public static UIManager UIManager
     {
         get { return Instance?.m_UIManager; }
@@ -38,11 +44,13 @@ public class GameController : SingletonBehaviour<GameController>, IHudController
 
     public int CurrentScore
     {
+        // TODO: Implement
         get { return 100000000; }
     }
 
     public int CurrentMotivation
     {
+        // TODO: Implement
         get { return 250; }
     }
 
@@ -56,10 +64,21 @@ public class GameController : SingletonBehaviour<GameController>, IHudController
         get { return (float)CurrentMotivation / (float)MaxMotivation; }
     }
 
+    public TimeSpan TimeElapsed
+    {
+        // TODO: Implement
+        get { return new TimeSpan(0, 0, 0); }
+    }
+
     void Awake()
     {
         Assert.IsNotNull(m_UIManager, "Must specify a UIManager.");
         Assert.IsNotNull(m_Player, "Must pass ref to the player");
+
+        // Cache game session
+        m_Session = GetComponent<GameSession>();
+        Assert.IsNotNull(m_Session, "Must add a GameSession component onto the GameController.");
+
         m_Camera = Camera.main;
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
         playerTracker.trackedObject = m_Player;
