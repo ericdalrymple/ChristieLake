@@ -9,12 +9,12 @@ public class PlayerTracker : MonoBehaviour
     public GameObject trackedObject;
     public float maxDistance = 10;
     public float moveSpeed = 100;
-    public float updateSpeed = 100;
+    public float updateSpeed = 1000;
 
     [Range(0, 10)]
     public float currentDistance = 5;
     private GameObject ahead;
-    private MeshRenderer _renderer;
+    //private MeshRenderer _renderer;
     public float hideDistance = 1.5f;
 
     private void Start()
