@@ -12,10 +12,15 @@ public class SplashView : UIView
     private void Awake()
     {
         Assert.IsNotNull(m_TitleLabel);
+
+        foreach (string joystick in Input.GetJoystickNames())
+        {
+            Debug.Log(joystick);
+        }
     }
 
     protected override void RefreshView()
     {
-        m_TitleLabel.SetText(GameController.Instance.GameTitle);
+        m_TitleLabel.SetText(GameController.GameTitle);
     }
 }
