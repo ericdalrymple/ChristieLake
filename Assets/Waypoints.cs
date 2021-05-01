@@ -20,19 +20,10 @@ public class Waypoints : MonoBehaviour
             child.gameObject.SetActive(false);
             waypoints.Enqueue(child.gameObject);
         }
-        // if not empty
-
-        if (waypoints.Count > 0)
-        { 
-            nextWaypoint = waypoints.Dequeue();
-            nextWaypoint.SetActive(true);
-        }
-        else
-        // empty 
-        {
-
-        }
         
+        nextWaypoint = waypoints.Dequeue();
+        nextWaypoint.SetActive(true);
+          
     }
 
 
@@ -40,7 +31,18 @@ public class Waypoints : MonoBehaviour
     {
         print("Reached waypoint!");
         nextWaypoint?.SetActive(false);
-        nextWaypoint = waypoints.Dequeue();
-        nextWaypoint.SetActive(true);
+
+        // if not empty
+        if (waypoints.Count > 0)
+        {
+            nextWaypoint = waypoints.Dequeue();
+            nextWaypoint.SetActive(true);
+        }
+        else
+        // empty 
+        {
+            Debug.Log("Finished Race!");
+            SendMessageUpwards("OnFinishRace", null, SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
