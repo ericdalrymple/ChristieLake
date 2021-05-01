@@ -9,12 +9,10 @@ public class CanoeController : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField]
-    float speed = 1.0f;
-    //FloatReference speed = ;
+    FloatReference speed = new FloatReference(1.0f);
 
     [SerializeField]
-    float torque = 1.0f;
-    //FloatReference torque
+    FloatReference torque = new FloatReference(1.0f);
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +25,14 @@ public class CanoeController : MonoBehaviour
     {
         if (Input.GetKey("a"))
         {
-            rb.AddForce(speed * Vector3.forward);
-            rb.AddTorque(transform.up * torque * 1f);
+            rb.AddForce(speed.Value * Vector3.forward);
+            rb.AddTorque(transform.up * torque.Value * 1f);
         }
 
         if (Input.GetKey("d"))
         {
-            rb.AddForce(speed * Vector3.forward);
-            rb.AddTorque(transform.up * torque * -1f);
+            rb.AddForce(speed.Value * Vector3.forward);
+            rb.AddTorque(transform.up * torque.Value * -1f);
         }
     }
 }
