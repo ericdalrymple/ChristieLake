@@ -36,6 +36,16 @@ namespace PocketValues
                 }
             }
         }
+
+        public VariableReference()
+            : base()
+        { }
+
+        public VariableReference(ValueType initialValue)
+            : base(true)
+        {
+            constant = initialValue;
+        }
     }
 }
 
