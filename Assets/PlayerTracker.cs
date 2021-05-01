@@ -8,8 +8,8 @@ public class PlayerTracker : MonoBehaviour
 {
     public GameObject trackedObject;
     public float maxDistance = 10;
-    public float moveSpeed = 50;
-    public float updateSpeed = 10;
+    public float moveSpeed = 100;
+    public float updateSpeed = 100;
 
     [Range(0, 10)]
     public float currentDistance = 5;
@@ -25,9 +25,12 @@ public class PlayerTracker : MonoBehaviour
 
     private void LateUpdate()
     {
-        
+        float cameraDistance = Vector3.Distance(transform.position, trackedObject.transform.position);
+        float cameraSpeed = cameraDistance / maxDistance;
+
         ahead.transform.position = trackedObject.transform.position + trackedObject.transform.forward * (maxDistance * 0.25f);
-        transform.position = Vector3.MoveTowards(transform.position, trackedObject.transform.position + Vector3.up * currentDistance - trackedObject.transform.forward * (currentDistance + maxDistance * 0.5f), updateSpeed * Time.deltaTime);
+        Vector3 newCameraPosition = trackedObject.transform.position + Vector3.up * currentDistance  - trackedObject.transform.forward * (currentDistance + maxDistance * 0.5f);
+        transform.position = Vector3.MoveTowards(transform.position, newCameraPosition, cameraSpeed* updateSpeed * Time.deltaTime);
 
         transform.LookAt(ahead.transform);
     }
