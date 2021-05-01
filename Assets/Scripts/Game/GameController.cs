@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class GameController : SingletonBehaviour<GameController>
+public class GameController : SingletonBehaviour<GameController>, IHudController
 {
     [Header("Subsystems")]
 
@@ -31,6 +31,11 @@ public class GameController : SingletonBehaviour<GameController>
     public static string GameTitle
     {
         get { return Instance?.m_GameTitle.Value; }
+    }
+
+    public int CurrentScore
+    {
+        get { return 100000000; }
     }
 
     void Awake()

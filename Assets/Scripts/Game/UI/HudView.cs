@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class HudView : UIView<IdleState>
+public class HudView : UIView<IHudController>
 {
+    [SerializeField]
+    private TMP_Text m_ScoreLabel;
+
     private void Awake()
     {
-        // Assert widget bindings
+        Assert.IsNotNull(m_ScoreLabel);
     }
 
     private void Update()
@@ -16,8 +20,9 @@ public class HudView : UIView<IdleState>
 
     }
 
-    protected override void RefreshView()
+    protected override void OnWillShow()
     {
         // Update widget states and contents
+        m_ScoreLabel.SetText(GetController().CurrentScore.ToString("N0"));
     }
 }

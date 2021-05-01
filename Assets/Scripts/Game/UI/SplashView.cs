@@ -14,16 +14,7 @@ public class SplashView : UIView<SplashState>
         Assert.IsNotNull(m_TitleLabel);
     }
 
-    void Update()
-    {
-        
-    }
-
-    protected override void OnShown()
-    {
-    }
-
-    protected override void RefreshView()
+    protected override void OnWillShow()
     {
         m_TitleLabel.SetText(GetController().GameTitle);
     }

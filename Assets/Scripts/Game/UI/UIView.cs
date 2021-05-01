@@ -17,18 +17,13 @@ public abstract class UIView<ControllerType> : BaseUIView where ControllerType :
 
         set
         {
-            bool validType = value.GetType().IsAssignableFrom(typeof(ControllerType));
+            bool validType = typeof(ControllerType).IsAssignableFrom(value.GetType());
             Assert.IsTrue(validType);
             if (validType)
             {
                 m_Controller = (ControllerType)value;
             }
         }
-    }
-
-    void Start()
-    {
-        RefreshView();
     }
 
     public override void Hide()
@@ -44,8 +39,6 @@ public abstract class UIView<ControllerType> : BaseUIView where ControllerType :
         OnWillShow();
         OnShown();
     }
-
-    protected abstract void RefreshView();
 
     protected virtual void OnWillShow() {}
 

@@ -9,7 +9,7 @@ public class IdleState : GameState, IUIController
 
     public override void Enter()
     {
-        GameController.UIManager.ShowDialog(m_HudHandle, this);
+        GameController.UIManager.ShowDialog(m_HudHandle, GameController.Instance);
     }
 
     public override void Exit() { }
