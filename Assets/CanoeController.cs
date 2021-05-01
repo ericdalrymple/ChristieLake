@@ -14,8 +14,12 @@ public class CanoeController : MonoBehaviour
     FloatReference speed = new FloatReference(1.0f);
 
     [SerializeField]
+    FloatReference lateralSpeed = new FloatReference(1.0f);
+
+    [SerializeField]
     FloatReference torque = new FloatReference(1.0f);
-    
+
+
     [SerializeField]
     InputActionAsset inputActionAsset;
 
@@ -81,14 +85,16 @@ public class CanoeController : MonoBehaviour
     public void OnRowLeft(InputAction.CallbackContext context)
     {
         print("Row Left");
-        rb.AddForce(speed.Value * Vector3.forward);
+        rb.AddForce(speed.Value * transform.forward);
+        rb.AddForce(0.2f * speed.Value * transform.right);
         rb.AddTorque(transform.up * torque.Value * 1f);
     }
 
     public void OnRowRight(InputAction.CallbackContext context)
     {
         print("Row Right");
-        rb.AddForce(speed.Value * Vector3.forward);
+        rb.AddForce(speed.Value * transform.forward);
+        rb.AddForce(0.2f * speed.Value * transform.right * -1);
         rb.AddTorque(transform.up * torque.Value * -1f);
     }
 }

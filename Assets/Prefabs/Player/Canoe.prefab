@@ -249,6 +249,10 @@ MonoBehaviour:
     useConstant: 0
     constant: 1
     variable: {fileID: 11400000, guid: 0712b6355b8544b49b3a2b3c19c963b5, type: 2}
+  lateralSpeed:
+    useConstant: 0
+    constant: 1
+    variable: {fileID: 11400000, guid: 4ed010eb817d96246a2d09d85e92c7f8, type: 2}
   torque:
     useConstant: 0
     constant: 1

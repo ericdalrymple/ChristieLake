@@ -8,7 +8,7 @@ public class PlayerTracker : MonoBehaviour
 {
     public GameObject trackedObject;
     public float maxDistance = 10;
-    public float moveSpeed = 20;
+    public float moveSpeed = 50;
     public float updateSpeed = 10;
 
     [Range(0, 10)]
