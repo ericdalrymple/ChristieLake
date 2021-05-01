@@ -60,12 +60,12 @@ public class UIManager : MonoBehaviour
         m_ViewLookup.Remove(view.Handle);
     }
 
-    public void ShowDialog(UIHandle viewHandle)
+    public UIView ShowDialog(UIHandle viewHandle, UIController controller)
     {
         if (viewHandle == null)
         {
             // Null key
-            return;
+            return null;
         }
 
         UIView dialog;
@@ -73,13 +73,15 @@ public class UIManager : MonoBehaviour
 
         if ((dialog != null) && (dialog != CurrentDialog))
         {
-            dialog.Show();
+            dialog.Show(controller);
 
             if (dialog.PushToNavigationStack && CurrentDialog != dialog)
             {
                 m_NavigationStack.Push(dialog);
             }
         }
+
+        return dialog;
     }
 
     private bool PopInvalidViews()

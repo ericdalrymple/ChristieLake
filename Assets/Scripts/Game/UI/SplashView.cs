@@ -12,11 +12,6 @@ public class SplashView : UIView
     private void Awake()
     {
         Assert.IsNotNull(m_TitleLabel);
-
-        foreach (string joystick in Input.GetJoystickNames())
-        {
-            Debug.Log(joystick);
-        }
     }
 
     protected override void RefreshView()
