@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Waypoints : MonoBehaviour
 {
-
     private Queue<GameObject> waypoints;
 
     private GameObject nextWaypoint;
@@ -18,11 +17,22 @@ public class Waypoints : MonoBehaviour
         foreach (Transform child in transform)
         {
             print("Add waypoint!");
+            child.gameObject.SetActive(false);
             waypoints.Enqueue(child.gameObject);
         }
-        nextWaypoint = waypoints.Dequeue();
-        nextWaypoint.SetActive(true);
+        // if not empty
 
+        if (waypoints.Count > 0)
+        { 
+            nextWaypoint = waypoints.Dequeue();
+            nextWaypoint.SetActive(true);
+        }
+        else
+        // empty 
+        {
+
+        }
+        
     }
 
 
