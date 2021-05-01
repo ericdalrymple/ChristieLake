@@ -67,7 +67,7 @@ public class CanoeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(IsUpsideDown());
+        print("Is upside donw?" + IsUpsideDown());
     }
 
 

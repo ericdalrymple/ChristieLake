@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedObject: {fileID: 0}
   maxDistance: 10
-  moveSpeed: 20
+  moveSpeed: 60
   updateSpeed: 10
   currentDistance: 5
   hideDistance: 1.5
