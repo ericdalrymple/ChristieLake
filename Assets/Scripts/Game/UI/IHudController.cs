@@ -8,4 +8,19 @@ public interface IHudController : IUIController
     {
         get;
     }
+
+    int CurrentMotivation
+    {
+        get;
+    }
+
+    int MaxMotivation
+    {
+        get;
+    }
+
+    float MotivationPercent
+    {
+        get;
+    }
 }

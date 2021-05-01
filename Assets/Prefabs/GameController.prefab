@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Handle: {fileID: 11400000, guid: 53799ccca8c84d84c9b1dda0eca5763a, type: 2}
-  m_SplashScreenHandle: {fileID: 11400000, guid: 6515f1f33eeb463419a9be2b8ef8b864, type: 2}
+  m_SplashViewHandle: {fileID: 0}
+  m_GameTitle:
+    useConstant: 1
+    constant: 
+    variable: {fileID: 0}
 --- !u!1 &3359956600228411204
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +101,12 @@ MonoBehaviour:
     useConstant: 0
     constant: 
     variable: {fileID: 11400000, guid: 52bc04fbadfb3cd498ef0991ee8c6bc3, type: 2}
+  m_MaxMotivation:
+    useConstant: 0
+    constant: 100
+    variable: {fileID: 11400000, guid: 756f3d0965e32f24eb73f22da417e15e, type: 2}
+  m_Player: {fileID: 0}
+  m_Camera: {fileID: 0}
 --- !u!114 &3250793203473878885
 MonoBehaviour:
   m_ObjectHideFlags: 0

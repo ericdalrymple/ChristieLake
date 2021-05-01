@@ -18,6 +18,9 @@ public class GameController : SingletonBehaviour<GameController>, IHudController
     private StringReference m_GameTitle = new StringReference();
 
     [SerializeField]
+    private IntegerReference m_MaxMotivation = new IntegerReference(100);
+
+    [SerializeField]
     private GameObject m_Player;
 
     [SerializeField]
@@ -36,6 +39,21 @@ public class GameController : SingletonBehaviour<GameController>, IHudController
     public int CurrentScore
     {
         get { return 100000000; }
+    }
+
+    public int CurrentMotivation
+    {
+        get { return 250; }
+    }
+
+    public int MaxMotivation
+    {
+        get { return m_MaxMotivation.Value; }
+    }
+
+    public float MotivationPercent
+    {
+        get { return (float)CurrentMotivation / (float)MaxMotivation; }
     }
 
     void Awake()
