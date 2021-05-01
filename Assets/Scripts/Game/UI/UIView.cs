@@ -4,38 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public abstract class UIView : MonoBehaviour
+public abstract class UIView<ControllerType> : BaseUIView where ControllerType : IUIController
 {
-    [SerializeField]
-    private UIHandle m_Handle;
+    private ControllerType m_Controller;
 
-    [SerializeField]
-    private bool m_ShowOnStart = false;
-
-    [SerializeField]
-    private bool m_PushToNavigationStack = true;
-
-    public string Handle
+    public override IUIController Controller
     {
         get
         {
-            if (m_Handle != null)
-            {
-                return m_Handle.Value;
-            }
-
-            return string.Empty;
+            return m_Controller;
         }
-    }
 
-    public bool ShowOnStart
-    {
-        get { return m_ShowOnStart; }
-    }
-
-    public bool PushToNavigationStack
-    {
-        get { return m_PushToNavigationStack; }
+        set
+        {
+            bool validType = value.GetType().IsAssignableFrom(typeof(ControllerType));
+            Assert.IsTrue(validType);
+            if (validType)
+            {
+                m_Controller = (ControllerType)value;
+            }
+        }
     }
 
     void Start()
@@ -43,21 +31,32 @@ public abstract class UIView : MonoBehaviour
         RefreshView();
     }
 
-    public void Hide()
+    public override void Hide()
     {
         gameObject.SetActive(false);
+        OnWillHide();
         OnHidden();
     }
 
-    public void Show()
+    public override void Show()
     {
         gameObject.SetActive(true);
+        OnWillShow();
         OnShown();
     }
 
     protected abstract void RefreshView();
 
+    protected virtual void OnWillShow() {}
+
     protected virtual void OnShown() {}
 
+    protected virtual void OnWillHide() {}
+
     protected virtual void OnHidden() {}
+
+    protected ControllerType GetController()
+    {
+        return m_Controller;
+    }
 }
