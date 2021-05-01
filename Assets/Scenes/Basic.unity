@@ -811,6 +811,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91630098e08c5604a8e73dc3a5f0ce4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1615493493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6605238712044512916, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
+  m_PrefabInstance: {fileID: 6605238711512211425}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1615493494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6605238712044512919, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
@@ -1070,6 +1075,10 @@ PrefabInstance:
       value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 3359956600228411205, guid: e495927f5f056f746b6864f453f4568a, type: 3}
+      propertyPath: m_Player
+      value: 
+      objectReference: {fileID: 1615493493}
+    - target: {fileID: 3359956600228411205, guid: e495927f5f056f746b6864f453f4568a, type: 3}
       propertyPath: m_GameTitle.useConstant
       value: 0
       objectReference: {fileID: 0}
@@ -1172,6 +1181,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6605238712044512919, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6741441837195252856, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
+      propertyPath: speed.variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 0712b6355b8544b49b3a2b3c19c963b5, type: 2}
+    - target: {fileID: 6741441837195252856, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
+      propertyPath: torque.variable
+      value: 
+      objectReference: {fileID: 11400000, guid: 418f7fbef1a3f794980a7f84e8ef6d7f, type: 2}
+    - target: {fileID: 6741441837195252856, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
+      propertyPath: speed.useConstant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6741441837195252856, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
+      propertyPath: torque.useConstant
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
