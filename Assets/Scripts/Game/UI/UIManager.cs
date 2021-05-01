@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
         m_ViewLookup.Remove(view.Handle);
     }
 
-    public UIView ShowDialog(UIHandle viewHandle, UIController controller)
+    public UIView ShowDialog(UIHandle viewHandle)
     {
         if (viewHandle == null)
         {
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
 
         if ((dialog != null) && (dialog != CurrentDialog))
         {
-            dialog.Show(controller);
+            dialog.Show();
 
             if (dialog.PushToNavigationStack && CurrentDialog != dialog)
             {

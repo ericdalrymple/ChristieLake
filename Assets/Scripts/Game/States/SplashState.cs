@@ -9,7 +9,7 @@ public class SplashState : GameState
 
     public override void Enter()
     {
-        GameController.UIManager.ShowDialog(m_SplashScreenHandle, this);
+        GameController.UIManager.ShowDialog(m_SplashScreenHandle);
     }
 
     public override void Exit()

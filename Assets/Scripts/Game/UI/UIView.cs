@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public abstract class UIView<ControllerType> : MonoBehaviour
+public abstract class UIView : MonoBehaviour
 {
     [SerializeField]
     private UIHandle m_Handle;
@@ -49,15 +49,15 @@ public abstract class UIView<ControllerType> : MonoBehaviour
         OnHidden();
     }
 
-    public void Show(ControllerType controller)
+    public void Show()
     {
         gameObject.SetActive(true);
-        OnShown(controller);
+        OnShown();
     }
 
     protected abstract void RefreshView();
 
-    protected virtual void OnShown(Object controller) {}
+    protected virtual void OnShown() {}
 
     protected virtual void OnHidden() {}
 }
