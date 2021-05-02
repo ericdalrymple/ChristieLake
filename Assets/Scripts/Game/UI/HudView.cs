@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,6 +11,9 @@ public class HudView : UIView<IHudController>
 {
     [SerializeField]
     private TMP_Text m_ScoreLabel;
+
+    [SerializeField]
+    private TMP_Text m_TimerLabel;
 
     [SerializeField]
     private Image m_MotivationMeter;
@@ -25,5 +29,16 @@ public class HudView : UIView<IHudController>
         m_ScoreLabel.SetText(GetController().CurrentScore.ToString("N0"));
 
         m_MotivationMeter.fillAmount = 0.5f;
+    }
+
+    private void Update()
+    {
+        // Update timer
+        TimeSpan elapsed = GetController().TimeElapsed;
+        m_TimerLabel.SetText(
+            elapsed.Hours.ToString("D2") + ":" +
+            elapsed.Minutes.ToString("D2") + ":" +
+            elapsed.Seconds.ToString("D2") + "." +
+            (elapsed.Milliseconds / 10).ToString("D2"));
     }
 }

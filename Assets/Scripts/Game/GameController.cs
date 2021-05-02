@@ -65,8 +65,7 @@ public class GameController
 
     public TimeSpan TimeElapsed
     {
-        // TODO: Implement
-        get { return new TimeSpan(0, 0, 0); }
+        get { return m_Session.ElapsedTime; }
     }
 
     public GameObject GetPlayer()

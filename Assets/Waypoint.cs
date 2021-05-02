@@ -7,13 +7,21 @@ public class Waypoint : MonoBehaviour
     private Collider closeEnough;
     private Waypoints course;
 
+    private Animator m_BobAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         closeEnough = GetComponent<Collider>();
+
+        m_BobAnimator = GetComponent<Animator>();
+        m_BobAnimator.Play("WaypointBob");
+
         //Debug.Log("Trigger on");
-        transform.rotation = Random.rotation;
+        // optionally, rotate buoy model
+        //transform.rotation = Random.rotation;
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

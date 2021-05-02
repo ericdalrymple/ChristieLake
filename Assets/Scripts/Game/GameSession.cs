@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
-    private TimeSpan m_TimeElapsed;
+    private float m_SessionStartTime;
+    private float m_LastTime;
 
     private bool m_TrackTime = false;
 
@@ -17,12 +18,16 @@ public class GameSession : MonoBehaviour
 
     public TimeSpan ElapsedTime
     {
-        get { return m_TimeElapsed; }
+        get
+        {
+            float elapsed = m_LastTime - m_SessionStartTime;
+            return TimeSpan.FromSeconds(elapsed);
+        }
     }
 
     public void Reset()
     {
-        m_TimeElapsed = new TimeSpan(0, 0, 0);
+        m_SessionStartTime = 0.0f;
     }
 
     void Update()
@@ -30,9 +35,7 @@ public class GameSession : MonoBehaviour
         if (m_TrackTime)
         {
             // Update the race duration
-            int seconds = (int)Time.deltaTime;
-            int milliseconds = (int)(Time.deltaTime * 1000) - (seconds * 1000);
-            m_TimeElapsed.Add(new TimeSpan(0, 0, seconds, milliseconds));
+            m_LastTime = Time.time;
 
             // Drain motivation
         }
@@ -41,6 +44,7 @@ public class GameSession : MonoBehaviour
     public void OnStartRace()
     {
         m_TrackTime = true;
+        m_SessionStartTime = m_LastTime = Time.time;
     }
 
     public void OnFinishRace()

@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Canoe
-  m_Shader: {fileID: 4800000, guid: 8fa84e1c8f3a97b4bb416e8eb087630e, type: 3}
+  m_Name: Waypointpointer
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -52,8 +52,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 525f4269cf064c64d85879822f2953e7, type: 3}
+        m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
@@ -63,40 +63,44 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TerrainHolesTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelBrightness: 0
+    - _FresnelBrightness: 0.255
     - _FresnelPower: 0
-    - _FresnelShadowDropoff: 0
+    - _FresnelShadowDropoff: 0.164
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _HighIntensity: 1.5
-    - _LightScalar: 1.81
+    - _LightScalar: 1.16
     - _LowIntensity: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineSize: 3
+    - _OutlineSize: 20
     - _Parallax: 0.02
-    - _RampLevels: 4
+    - _RampLevels: 8
     - _RimAlpha: 0
     - _RimDropOff: 0
-    - _RimPower: 0
+    - _RimPower: 0.314
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.35644355, g: 0.7378812, b: 0.8490566, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HighColor: {r: 0.7169812, g: 0.4698179, b: 0.11160557, a: 1}
-    - _LowColor: {r: 0.3584906, g: 0.14373444, b: 0.23149687, a: 1}
+    - _FresnelColor: {r: 0.8291417, g: 0.8773585, b: 0.5835262, a: 1}
+    - _HighColor: {r: 0.9610128, g: 1, b: 0.8915094, a: 1}
+    - _LowColor: {r: 0.22512968, g: 0.21560162, b: 0.8018868, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
