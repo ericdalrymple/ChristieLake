@@ -18,9 +18,6 @@ public class GameController
     [SerializeField]
     private StringReference m_GameTitle = new StringReference();
 
-    [SerializeField]
-    private IntegerReference m_MaxMotivation = new IntegerReference(100);
-
     private Camera m_Camera;
     private CanoeController m_Player;
     private GameSession m_Session;
@@ -50,18 +47,20 @@ public class GameController
 
     public int CurrentMotivation
     {
-        // TODO: Implement
-        get { return 250; }
-    }
-
-    public int MaxMotivation
-    {
-        get { return m_MaxMotivation.Value; }
+        get { return m_Session.CurrentMotivation; }
     }
 
     public float MotivationPercent
     {
-        get { return (float)CurrentMotivation / (float)MaxMotivation; }
+        get
+        {
+            if (m_Session.MaxMotivation <= 0)
+            {
+                return 0;
+            }
+
+            return (float)CurrentMotivation / (float)m_Session.MaxMotivation;
+        }
     }
 
     public int CurrentWaypoint
