@@ -25,5 +25,13 @@ namespace PocketValues
                 return this.useConstant;
             }
         }
+
+        public BaseVariableReference()
+        { }
+
+        public BaseVariableReference(bool useConstant)
+        {
+            this.useConstant = useConstant;
+        }
     }
 }

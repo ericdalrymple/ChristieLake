@@ -4,18 +4,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-public class SplashView : UIView
+public class SplashView : UIView<SplashState>
 {
     [SerializeField]
     private TMP_Text m_TitleLabel;
 
-    private void Awake()
+    void Awake()
     {
         Assert.IsNotNull(m_TitleLabel);
     }
 
-    protected override void RefreshView()
+    protected override void OnWillShow()
     {
-        m_TitleLabel.SetText(GameController.Instance.GameTitle);
+        m_TitleLabel.SetText(GetController().GameTitle);
     }
 }
