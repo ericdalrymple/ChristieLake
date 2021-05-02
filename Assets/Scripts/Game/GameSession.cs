@@ -39,7 +39,7 @@ public class GameSession : MonoBehaviour
 
     public void Reset()
     {
-        m_Motivation = m_MaxMotivation.Value;
+        m_Motivation = 0.0f;
         m_SessionStartTime = 0.0f;
     }
 
@@ -69,5 +69,10 @@ public class GameSession : MonoBehaviour
     public void OnFinishRace()
     {
         m_TrackTime = false;
+    }
+
+    public void OnReachWaypoint()
+    {
+        m_Motivation = m_MaxMotivation.Value;
     }
 }

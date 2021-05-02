@@ -62,6 +62,7 @@ public class Waypoints : MonoBehaviour
             nextWaypoint = waypoints.Dequeue();
             waypointPointer.target = nextWaypoint;
             nextWaypoint.SetActive(true);
+            GameController.GameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_REACHED, null, SendMessageOptions.DontRequireReceiver);
         }
         else
         // empty 
