@@ -87,12 +87,15 @@ public class GameController
         //m_RaceScene = SceneManager.GetSceneByName("Basic");
         //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
         //m_PropsScene = SceneManager.GetSceneByName("Props");
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
     protected override void OnSceneLoaded()
