@@ -15,11 +15,6 @@ public interface IHudController : IUIController
         get;
     }
 
-    int MaxMotivation
-    {
-        get;
-    }
-
     float MotivationPercent
     {
         get;

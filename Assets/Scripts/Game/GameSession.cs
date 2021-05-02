@@ -1,3 +1,4 @@
+using PocketValues.Types;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,15 +6,26 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
-    private float m_SessionStartTime;
+    [SerializeField]
+    private IntegerReference m_MaxMotivation = new IntegerReference();
+
+    [SerializeField]
+    private FloatReference m_MotivationDecayRate = new FloatReference(10.0f);
+
     private float m_LastTime;
+    private float m_Motivation;
+    private float m_SessionStartTime;
 
     private bool m_TrackTime = false;
 
-    public int RemainingMotivation
+    public int MaxMotivation
     {
-        get;
-        private set;
+        get { return m_MaxMotivation.Value; }
+    }
+
+    public int CurrentMotivation
+    {
+        get { return (int)m_Motivation; }
     }
 
     public TimeSpan ElapsedTime
@@ -27,6 +39,7 @@ public class GameSession : MonoBehaviour
 
     public void Reset()
     {
+        m_Motivation = 0.0f;
         m_SessionStartTime = 0.0f;
     }
 
@@ -37,7 +50,13 @@ public class GameSession : MonoBehaviour
             // Update the race duration
             m_LastTime = Time.time;
 
-            // Drain motivation
+            // Decay motivation
+            float decayAmount = m_MotivationDecayRate.Value * Time.deltaTime;
+            m_Motivation -= decayAmount;
+            if (m_Motivation < 0.0f)
+            {
+                m_Motivation = 0.0f;
+            }
         }
     }
 
@@ -50,5 +69,10 @@ public class GameSession : MonoBehaviour
     public void OnFinishRace()
     {
         m_TrackTime = false;
+    }
+
+    public void OnReachWaypoint()
+    {
+        m_Motivation = m_MaxMotivation.Value;
     }
 }

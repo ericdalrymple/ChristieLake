@@ -143,17 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bdb04a18a24ea249a485214c0474953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UIManager: {fileID: 7326386647792818080}
   m_GameTitle:
     useConstant: 0
     constant: 
     variable: {fileID: 11400000, guid: 52bc04fbadfb3cd498ef0991ee8c6bc3, type: 2}
-  m_MaxMotivation:
-    useConstant: 0
-    constant: 100
-    variable: {fileID: 11400000, guid: 756f3d0965e32f24eb73f22da417e15e, type: 2}
-  m_Player: {fileID: 0}
-  m_Camera: {fileID: 0}
 --- !u!114 &3250793203473878885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6da5dc90be79234f95b6d933808af24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MaxMotivation:
+    useConstant: 0
+    constant: 0
+    variable: {fileID: 11400000, guid: 756f3d0965e32f24eb73f22da417e15e, type: 2}
+  m_MotivationDecayRate:
+    useConstant: 1
+    constant: 100
+    variable: {fileID: 0}
 --- !u!114 &7326386647792818080
 MonoBehaviour:
   m_ObjectHideFlags: 0
