@@ -70,6 +70,11 @@ public class GameController
         get { return new TimeSpan(0, 0, 0); }
     }
 
+    public GameObject GetPlayer()
+    {
+        return m_Player;
+    }
+
     void Awake()
     {
         Assert.IsNotNull(m_UIManager, "Must specify a UIManager.");
@@ -93,7 +98,7 @@ public class GameController
     public void StartGame()
     {
         m_Session.Reset();
-        Debug.Log("Start race! Scene: " + SceneManager.GetActiveScene().ToString());
+        //Debug.Log("Start race! Scene: " + SceneManager.GetActiveScene().ToString());
 
     }
 

@@ -11,7 +11,7 @@ public class Waypoint : MonoBehaviour
     void Start()
     {
         closeEnough = GetComponent<Collider>();
-        Debug.Log("Trigger on");        
+        //Debug.Log("Trigger on");        
     }
 
     private void OnTriggerEnter(Collider other)
