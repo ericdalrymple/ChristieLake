@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5904473251320044789}
   - component: {fileID: 5904473251320044788}
   - component: {fileID: 7617593311079072044}
-  - component: {fileID: 1106767329316232833}
   m_Layer: 0
   m_Name: Waypoint
   m_TagString: Untagged
@@ -60,47 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab7549de1664a34094733e0774a324f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1106767329316232833
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5904473251320044790}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &3289500443447174799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,7 +84,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f41230b006289ca488e6c28658dd62ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f41230b006289ca488e6c28658dd62ce, type: 3}
       propertyPath: m_LocalPosition.y
@@ -181,6 +139,10 @@ PrefabInstance:
       value: buoy_round_mesh
       objectReference: {fileID: 0}
     - target: {fileID: 1016597884729821527, guid: f41230b006289ca488e6c28658dd62ce, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d60b875ff7cae74f8158da31f4513c6, type: 2}
+    - target: {fileID: 6602572502220817476, guid: f41230b006289ca488e6c28658dd62ce, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3d60b875ff7cae74f8158da31f4513c6, type: 2}
