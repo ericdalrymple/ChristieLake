@@ -119,7 +119,7 @@ public class CanoeController : MonoBehaviour
     }
     public void OnRowLeft(InputAction.CallbackContext context)
     {
-        print("Row Left");
+        //print("Row Left");
         rb.AddForce(speed.Value * transform.forward);
         rb.AddForce(0.2f * speed.Value * transform.right);
         rb.AddTorque(transform.up * torque.Value * 1f);
@@ -127,7 +127,7 @@ public class CanoeController : MonoBehaviour
 
     public void OnRowRight(InputAction.CallbackContext context)
     {
-        print("Row Right");
+        //print("Row Right");
         rb.AddForce(speed.Value * transform.forward);
         rb.AddForce(0.2f * speed.Value * transform.right * -1);
         rb.AddTorque(transform.up * torque.Value * -1f);
@@ -137,7 +137,7 @@ public class CanoeController : MonoBehaviour
     {
         StartCoroutine(Row(right));
         //m_RowAnimation.Play();
-        Debug.Log("Row Forward " + ( right ? "Right" : "Left"));
+        //Debug.Log("Row Forward " + ( right ? "Right" : "Left"));
         rb.AddForce(speed.Value * transform.forward);
         rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
         rb.AddTorque(transform.up * torque.Value * (right ? -1 : 1));
@@ -147,7 +147,7 @@ public class CanoeController : MonoBehaviour
     {
         StartCoroutine(Row(right));
         //m_RowAnimation.Play();
-        Debug.Log("Row Forward " + (right ? "Right" : "Left"));
+        //Debug.Log("Row Forward " + (right ? "Right" : "Left"));
         rb.AddForce(speed.Value * transform.forward * -1);
         rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
         rb.AddTorque(transform.up * torque.Value * (right ? 1 : -1 ));

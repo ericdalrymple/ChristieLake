@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29603770acd910745b640ecff0d7c5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputActionAsset: {fileID: -944628639613478452, guid: 0f4423cd2e8a44b428a457613fe9e340, type: 3}
 --- !u!111 &1152110353491027529
 Animation:
   m_ObjectHideFlags: 0
