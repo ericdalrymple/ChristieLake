@@ -11,7 +11,11 @@ public class UIViewCollection : MonoBehaviour
     {
         foreach (BaseUIView view in m_Views)
         {
-            GameController.UIManager.Register(view);
+            if (view != null)
+            {
+                view.Hide();
+                GameController.UIManager.Register(view);
+            }
         }
     }
 

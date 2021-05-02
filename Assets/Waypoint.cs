@@ -17,7 +17,6 @@ public class Waypoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Waypoint reached!");
-        //BroadcastMessage("OnReachWaypoint", null, SendMessageOptions.DontRequireReceiver);
-        SendMessageUpwards("OnReachWaypoint", null, SendMessageOptions.DontRequireReceiver);
+        transform.parent.BroadcastMessage(GameMessages.MSG_WAYPOINT_REACHED, null, SendMessageOptions.DontRequireReceiver);
     }
 }

@@ -25,15 +25,14 @@ public class UIManager : MonoBehaviour
 
     public void ClearViews()
     {
-        // Hide all views and pop them from the navigation stack
-        while (m_NavigationStack.Count > 0)
+        // Hide all the view
+        foreach (BaseUIView view in m_ViewLookup.Values)
         {
-            if (!PopInvalidViews())
-            {
-                m_NavigationStack.Peek().Hide();
-                m_NavigationStack.Pop();
-            }
+            view?.Hide();
         }
+
+        // Clear the nav stack
+        m_NavigationStack.Clear();
     }
 
     public void NavigateBack()

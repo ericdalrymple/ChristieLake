@@ -7,10 +7,17 @@ public class GameSession : MonoBehaviour
 {
     private TimeSpan m_TimeElapsed;
 
+    private bool m_TrackTime = false;
+
     public int RemainingMotivation
     {
         get;
         private set;
+    }
+
+    public TimeSpan ElapsedTime
+    {
+        get { return m_TimeElapsed; }
     }
 
     public void Reset()
@@ -18,21 +25,26 @@ public class GameSession : MonoBehaviour
         m_TimeElapsed = new TimeSpan(0, 0, 0);
     }
 
-    public TimeSpan Elapsed()
-    {
-        return m_TimeElapsed;
-    }
-
     void Update()
     {
-        // Update the race duration
-        int seconds = (int)Time.deltaTime;
-        int milliseconds = (int)(Time.deltaTime * 1000) - (seconds * 1000);
-        m_TimeElapsed.Add(new TimeSpan(0, 0, seconds, milliseconds));
+        if (m_TrackTime)
+        {
+            // Update the race duration
+            int seconds = (int)Time.deltaTime;
+            int milliseconds = (int)(Time.deltaTime * 1000) - (seconds * 1000);
+            m_TimeElapsed.Add(new TimeSpan(0, 0, seconds, milliseconds));
 
-        // Drain motivation
-
+            // Drain motivation
+        }
     }
 
-    
+    public void OnStartRace()
+    {
+        m_TrackTime = true;
+    }
+
+    public void OnFinishRace()
+    {
+        m_TrackTime = false;
+    }
 }

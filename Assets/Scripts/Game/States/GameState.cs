@@ -18,6 +18,11 @@ public abstract class GameState : MonoBehaviour
         private set;
     }
 
+    void Awake()
+    {
+        StateMachine = GetComponentInParent<GameStateMachine>();
+    }
+
     public virtual void Enter() { }
     public virtual void Exit() { }
     public virtual void Update() { }

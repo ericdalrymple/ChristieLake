@@ -313,7 +313,7 @@ MonoBehaviour:
   speed:
     useConstant: 0
     constant: 1
-    variable: {fileID: 11400000, guid: 0712b6355b8544b49b3a2b3c19c963b5, type: 2}
+    variable: {fileID: 11400000, guid: e139bdfd90831a54794da2ac80a102f7, type: 2}
   lateralSpeed:
     useConstant: 0
     constant: 1
@@ -436,6 +436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16f7eb90452a164a8d87209a70f01a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  m_Player: {fileID: 0}
 --- !u!1001 &2154464857596904006
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,16 +6,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions;
 
+[RequireComponent(typeof(UIManager))]
+[RequireComponent(typeof(GameSession))]
 public class GameController
     : SingletonBehaviour<GameController>
     , IHudController
     , IResultsController
 {
-    [Header("Subsystems")]
-
-    [SerializeField]
-    private UIManager m_UIManager;
-
     [Header("Config")]
 
     [SerializeField]
@@ -24,13 +21,15 @@ public class GameController
     [SerializeField]
     private IntegerReference m_MaxMotivation = new IntegerReference(100);
 
-    [SerializeField]
-    private GameObject m_Player;
-
-    [SerializeField]
     private Camera m_Camera;
-
+    private CanoeController m_Player;
     private GameSession m_Session;
+    private UIManager m_UIManager;
+
+    public static GameObject GameObject
+    {
+        get { return Instance?.gameObject; }
+    }
 
     public static UIManager UIManager
     {
@@ -72,41 +71,23 @@ public class GameController
 
     public GameObject GetPlayer()
     {
-        return m_Player;
+        return m_Player.gameObject;
     }
 
     void Awake()
     {
-        Assert.IsNotNull(m_UIManager, "Must specify a UIManager.");
-        Assert.IsNotNull(m_Player, "Must pass ref to the player");
-
-        // Cache game session
+        // Cache local components
         m_Session = GetComponent<GameSession>();
         Assert.IsNotNull(m_Session, "Must add a GameSession component onto the GameController.");
 
-        m_Camera = Camera.main;
-        PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
-        playerTracker.trackedObject = m_Player;
+        m_UIManager = GetComponent<UIManager>();
+        Assert.IsNotNull(m_UIManager, "Must add a GameSession component onto the GameController.");
 
-        StartGame();
+        // Cache scenes
         //m_RaceScene = SceneManager.GetSceneByName("Basic");
         //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
         //m_PropsScene = SceneManager.GetSceneByName("Props");
     }
-
-
-    public void StartGame()
-    {
-        m_Session.Reset();
-        //Debug.Log("Start race! Scene: " + SceneManager.GetActiveScene().ToString());
-
-    }
-
-    public void OnFinishRace()
-    {
-        WinGame();
-    }
-
 
     public void ResetGame()
     {
@@ -114,11 +95,18 @@ public class GameController
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
     }
 
-
-     public void WinGame()
+    protected override void OnSceneLoaded()
     {
-        Debug.Log("Race time: " + m_Session.Elapsed().ToString());
-        ResetGame();
-    }
+        // Wipe the session
+        m_Session.Reset();
 
+        // Cache scene objects
+        m_Camera = Camera.main;
+        m_Player = FindObjectOfType<CanoeController>(false);
+        Assert.IsNotNull(m_Player, "No player found in the scene.");
+
+        // Setup tracker
+        PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
+        playerTracker.trackedObject = GetPlayer();
+    }
 }
