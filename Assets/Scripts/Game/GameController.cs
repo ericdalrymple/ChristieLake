@@ -102,7 +102,7 @@ public class GameController
 
     public void WinGame()
     {
-        Debug.Log("Race time: " + m_Session);
+        Debug.Log("Race time: " + m_Session.Elapsed().ToString());
         ResetGame();
     }
 
