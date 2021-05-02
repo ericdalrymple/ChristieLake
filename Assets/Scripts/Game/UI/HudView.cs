@@ -39,6 +39,6 @@ public class HudView : UIView<IHudController>
             elapsed.Hours.ToString("D2") + ":" +
             elapsed.Minutes.ToString("D2") + ":" +
             elapsed.Seconds.ToString("D2") + "." +
-            elapsed.Milliseconds.ToString("D2"));
+            (elapsed.Milliseconds / 10).ToString("D2"));
     }
 }
