@@ -86,7 +86,7 @@ public class GameController
         StartGame();
         //m_RaceScene = SceneManager.GetSceneByName("Basic");
         //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
-
+        //m_PropsScene = SceneManager.GetSceneByName("Props");
     }
 
 

@@ -19,6 +19,7 @@ public class IdleState : GameState, IUIController
 
     public override void Update()
     {
+        // 
     }
 
     public override void FixedUpdate()

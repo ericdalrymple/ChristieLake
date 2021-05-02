@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3263942881007242016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 7156505315084466401}
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3661639628750336703, guid: 1c484f4bcf3144c4c8f2e5440cb41a68, type: 3}
+  - {fileID: 2100000, guid: 8ac708e37eab78e4896407732ec2b12b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,6 +87,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9ff5a610c9686b649bed0bbe1fb2e769, type: 3}
+--- !u!136 &785011841
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7156505315084231873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 10.82424
+  m_Height: 20.405497
+  m_Direction: 1
+  m_Center: {x: 0.57661486, y: -0.0693078, z: 4.7018523}
 --- !u!1001 &7156505315084329569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,7 +122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ff5a610c9686b649bed0bbe1fb2e769, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9ff5a610c9686b649bed0bbe1fb2e769, type: 3}
       propertyPath: m_LocalPosition.z
@@ -142,6 +156,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 9ff5a610c9686b649bed0bbe1fb2e769, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 655d2ea751df3c542a62abe6e45bc231, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ff5a610c9686b649bed0bbe1fb2e769, type: 3}
 --- !u!1 &7156505315084231873 stripped
