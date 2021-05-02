@@ -25,6 +25,16 @@ public interface IHudController : IUIController
         get;
     }
 
+    int CurrentWaypoint
+    {
+        get;
+    }
+
+    int WaypointCount
+    {
+        get;
+    }
+
     TimeSpan TimeElapsed
     {
         get;
