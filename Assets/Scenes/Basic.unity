@@ -1894,11 +1894,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!1 &1518625555 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6605238712044512916, guid: 89c9e15170cff21449c5871f0cbc4a9b, type: 3}
-  m_PrefabInstance: {fileID: 6605238711512211425}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1539135450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2333,7 +2328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9177476369250306231, guid: 33f3b3ad28ac35c4c93c5cbbc7b24ad8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33f3b3ad28ac35c4c93c5cbbc7b24ad8, type: 3}
@@ -2710,10 +2705,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameController
       objectReference: {fileID: 0}
-    - target: {fileID: 3359956600228411205, guid: e495927f5f056f746b6864f453f4568a, type: 3}
-      propertyPath: m_Player
-      value: 
-      objectReference: {fileID: 1518625555}
     - target: {fileID: 3359956600228411206, guid: e495927f5f056f746b6864f453f4568a, type: 3}
       propertyPath: m_RootOrder
       value: 2

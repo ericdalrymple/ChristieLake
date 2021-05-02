@@ -10,6 +10,9 @@ using UnityEngine.UI;
 public class HudView : UIView<IHudController>
 {
     [SerializeField]
+    private TMP_Text m_ScoreLabel;
+
+    [SerializeField]
     private TMP_Text m_WaypointLabel;
 
     [SerializeField]
@@ -22,6 +25,7 @@ public class HudView : UIView<IHudController>
     {
         Assert.IsNotNull(m_WaypointLabel);
         Assert.IsNotNull(m_TimerLabel);
+        Assert.IsNotNull(m_ScoreLabel);
     }
 
     protected override void OnWillShow()
@@ -32,6 +36,7 @@ public class HudView : UIView<IHudController>
     void Update()
     {
         UpdateMotivation();
+        UpdateScore();
         UpdateTimer();
         UpdateWaypoints();
     }
@@ -39,6 +44,11 @@ public class HudView : UIView<IHudController>
     private void UpdateMotivation()
     {
         m_MotivationMeter.fillAmount = GetController().MotivationPercent;
+    }
+
+    private void UpdateScore()
+    {
+        m_ScoreLabel.SetText(GetController().CurrentScore.ToString("N0"));
     }
 
     private void UpdateTimer()
