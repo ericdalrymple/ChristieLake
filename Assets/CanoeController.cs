@@ -37,13 +37,25 @@ public class CanoeController : MonoBehaviour
 
     private bool right = true;
 
+    //private Animation m_RowAnimation;
 
+    [SerializeField]
+    private GameObject m_PaddleLeft;
+    [SerializeField]
+    private GameObject m_PaddleRight;
 
     // Start is called before the first frame update
     void Awake()
     {
         Assert.IsNotNull(inputActionAsset, "Need inputActionAsset");
+        Assert.IsNotNull(m_PaddleLeft, "Canoe needs reference to Left paddle game object");
+        Assert.IsNotNull(m_PaddleRight, "Canoe needs reference to Right paddle game object");
+        m_PaddleLeft.SetActive(false);
+        m_PaddleRight.SetActive(false);
+
         rb = GetComponentInChildren<Rigidbody>();
+
+        //m_RowAnimation = GetComponentInChildren<Animation>(); // won't work: two paddles each have an animation. need to get from each paddle
 
         var gameplayActionMap = inputActionAsset.FindActionMap("Player");
 
@@ -123,6 +135,8 @@ public class CanoeController : MonoBehaviour
 
     public void OnRowForward(InputAction.CallbackContext context)
     {
+        StartCoroutine(Row(right));
+        //m_RowAnimation.Play();
         Debug.Log("Row Forward " + ( right ? "Right" : "Left"));
         rb.AddForce(speed.Value * transform.forward);
         rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
@@ -131,6 +145,8 @@ public class CanoeController : MonoBehaviour
 
     public void OnRowBackward(InputAction.CallbackContext context)
     {
+        StartCoroutine(Row(right));
+        //m_RowAnimation.Play();
         Debug.Log("Row Forward " + (right ? "Right" : "Left"));
         rb.AddForce(speed.Value * transform.forward * -1);
         rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
@@ -140,7 +156,20 @@ public class CanoeController : MonoBehaviour
 
     public void OnSwitchSides(InputAction.CallbackContext context)
     {
+        
         right = !right;
+        StartCoroutine(Row(right));
         Debug.Log("Switch to " + (right ? "Right" : "Left"));
     }
+
+    public IEnumerator Row(bool right)
+    {
+        m_PaddleLeft.SetActive(!right);
+        m_PaddleRight.SetActive(right);
+        yield return new WaitForSeconds(1);
+        m_PaddleLeft.SetActive(false);
+        m_PaddleRight.SetActive(false);
+    }
+
+        
 }
