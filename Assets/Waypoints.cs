@@ -8,9 +8,13 @@ public class Waypoints : MonoBehaviour
 
     private GameObject nextWaypoint;
 
+    private WaypointPointer waypointPointer;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        waypointPointer = GameController.Instance.GetPlayer().GetComponentInChildren<WaypointPointer>();
 
         waypoints = new Queue<GameObject>();
 
@@ -23,6 +27,8 @@ public class Waypoints : MonoBehaviour
         
         nextWaypoint = waypoints.Dequeue();
         nextWaypoint.SetActive(true);
+
+        waypointPointer.target = nextWaypoint;
           
     }
 
@@ -36,11 +42,13 @@ public class Waypoints : MonoBehaviour
         if (waypoints.Count > 0)
         {
             nextWaypoint = waypoints.Dequeue();
+            waypointPointer.target = nextWaypoint;
             nextWaypoint.SetActive(true);
         }
         else
         // empty 
         {
+            waypointPointer.target = null;
             Debug.Log("Finished Race!");
             GameController.Instance?.OnFinishRace();
             SendMessageUpwards("OnFinishRace", null, SendMessageOptions.DontRequireReceiver);
