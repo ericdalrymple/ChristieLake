@@ -34,11 +34,12 @@ public class PlayerTracker : MonoBehaviour
     private void LateUpdate()
     {
         float distance = Vector3.Distance(transform.position, trackedObject.transform.position);
-        float cameraSpeed = distance / cameraDistance;
+        float cameraSpeed = Mathf.Pow(distance / cameraDistance, 1.75f);
+
 
         target.transform.position = trackedObject.transform.position + targetHeightOffset * Vector3.up;
 
-        Vector3 newCameraPosition = trackedObject.transform.position + cameraHeight * Vector3.up - cameraDistance  * trackedObject.transform.forward;
+        Vector3 newCameraPosition = trackedObject.transform.position + cameraHeight * Vector3.up - cameraDistance * trackedObject.transform.forward;
         transform.position = Vector3.MoveTowards(transform.position, newCameraPosition, cameraSpeed * Time.deltaTime);
 
         transform.LookAt(target.transform);
