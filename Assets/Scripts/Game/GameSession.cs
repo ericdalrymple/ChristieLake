@@ -12,8 +12,12 @@ public class GameSession : MonoBehaviour
     [SerializeField]
     private FloatReference m_MotivationDecayRate = new FloatReference(10.0f);
 
+    [SerializeField]
+    private IntegerReference m_BuoyScore = new IntegerReference(250);
+
     private float m_LastTime;
     private float m_Motivation;
+    private int m_Score;
     private float m_SessionStartTime;
 
     private bool m_TrackTime = false;
@@ -28,6 +32,11 @@ public class GameSession : MonoBehaviour
         get { return (int)m_Motivation; }
     }
 
+    public int CurrentScore
+    {
+        get { return m_Score; }
+    }
+
     public TimeSpan ElapsedTime
     {
         get
@@ -40,6 +49,7 @@ public class GameSession : MonoBehaviour
     public void Reset()
     {
         m_Motivation = 0.0f;
+        m_Score = 0;
         m_SessionStartTime = 0.0f;
     }
 
@@ -73,6 +83,11 @@ public class GameSession : MonoBehaviour
 
     public void OnReachWaypoint()
     {
+        float motivationPercent = (m_MaxMotivation.Value == 0) ?
+            0 :
+            m_Motivation / (float)m_MaxMotivation.Value;
+
+        m_Score += (int)(m_BuoyScore.Value * (1.0f + motivationPercent));
         m_Motivation = m_MaxMotivation.Value;
     }
 }

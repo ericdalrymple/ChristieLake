@@ -41,8 +41,7 @@ public class GameController
 
     public int CurrentScore
     {
-        // TODO: Implement
-        get { return 100000000; }
+        get { return m_Session.CurrentScore; }
     }
 
     public int CurrentMotivation
