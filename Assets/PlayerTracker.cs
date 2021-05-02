@@ -28,7 +28,7 @@ public class PlayerTracker : MonoBehaviour
         float cameraDistance = Vector3.Distance(transform.position, trackedObject.transform.position);
         float cameraSpeed = cameraDistance / maxDistance;
 
-        ahead.transform.position = trackedObject.transform.position + trackedObject.transform.forward * (maxDistance * 0.1f);
+        ahead.transform.position = trackedObject.transform.position; // + trackedObject.transform.forward * (maxDistance * 0.1f);
         Vector3 newCameraPosition = trackedObject.transform.position + Vector3.up * currentDistance  - trackedObject.transform.forward * (currentDistance + maxDistance * 0.5f);
         transform.position = Vector3.MoveTowards(transform.position, newCameraPosition, cameraSpeed* updateSpeed * Time.deltaTime);
 

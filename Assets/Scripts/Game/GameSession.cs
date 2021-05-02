@@ -18,6 +18,11 @@ public class GameSession : MonoBehaviour
         m_TimeElapsed = new TimeSpan(0, 0, 0);
     }
 
+    public TimeSpan Elapsed()
+    {
+        return m_TimeElapsed;
+    }
+
     void Update()
     {
         // Update the race duration

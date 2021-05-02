@@ -82,7 +82,11 @@ public class GameController
         m_Camera = Camera.main;
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
         playerTracker.trackedObject = m_Player;
+
         StartGame();
+        //m_RaceScene = SceneManager.GetSceneByName("Basic");
+        //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
+
     }
 
 
@@ -93,23 +97,23 @@ public class GameController
 
     }
 
-
     public void OnFinishRace()
     {
         WinGame();
     }
 
 
-    public void WinGame()
-    {
-        Debug.Log("Race time: " + m_Session);
-        ResetGame();
-    }
-
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        StartGame();
     }
+
+
+     public void WinGame()
+    {
+        Debug.Log("Race time: " + m_Session.Elapsed().ToString());
+        ResetGame();
+    }
+
 }
