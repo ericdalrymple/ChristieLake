@@ -29,9 +29,10 @@ public class CanoeSelector : MonoBehaviour
         m_CanoeModels = new Queue<GameObject>();
         foreach (Transform child in transform)
         {
+            child.gameObject.SetActive(false);
             m_CanoeModels.Enqueue(child.gameObject);
         }
-
+        m_CanoeModels.Peek().SetActive(true);
     }
 
     private void OnEnable()
