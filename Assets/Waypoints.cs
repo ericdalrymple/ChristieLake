@@ -6,9 +6,26 @@ public class Waypoints : MonoBehaviour
 {
     private Queue<GameObject> waypoints;
 
+    private int m_TotalWaypointCount;
+
     private GameObject nextWaypoint;
 
     private WaypointPointer waypointPointer;
+
+    public int Count
+    {
+        get { return m_TotalWaypointCount; }
+    }
+
+    public int Completed
+    {
+        get { return m_TotalWaypointCount - waypoints.Count; }
+    }
+
+    public int Remaining
+    {
+        get { return waypoints.Count; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +36,12 @@ public class Waypoints : MonoBehaviour
 
         foreach (Transform child in transform)
         {
-            print("Add waypoint!");
+            Debug.Log("Add waypoint!");
             child.gameObject.SetActive(false);
             waypoints.Enqueue(child.gameObject);
         }
+
+        m_TotalWaypointCount = waypoints.Count;
         
         nextWaypoint = waypoints.Dequeue();
         nextWaypoint.SetActive(true);

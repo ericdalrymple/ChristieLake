@@ -25,6 +25,7 @@ public class GameController
     private CanoeController m_Player;
     private GameSession m_Session;
     private UIManager m_UIManager;
+    private Waypoints m_WaypointManager;
 
     public static GameObject GameObject
     {
@@ -61,6 +62,16 @@ public class GameController
     public float MotivationPercent
     {
         get { return (float)CurrentMotivation / (float)MaxMotivation; }
+    }
+
+    public int CurrentWaypoint
+    {
+        get { return m_WaypointManager.Completed; }
+    }
+
+    public int WaypointCount
+    {
+        get { return m_WaypointManager.Count; }
     }
 
     public TimeSpan TimeElapsed
@@ -106,6 +117,9 @@ public class GameController
         m_Camera = Camera.main;
         m_Player = FindObjectOfType<CanoeController>(false);
         Assert.IsNotNull(m_Player, "No player found in the scene.");
+
+        m_WaypointManager = FindObjectOfType<Waypoints>();
+        Assert.IsNotNull(m_Player, "No race course found in the scene.");
 
         // Setup tracker
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();

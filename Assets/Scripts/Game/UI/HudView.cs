@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class HudView : UIView<IHudController>
 {
     [SerializeField]
-    private TMP_Text m_ScoreLabel;
+    private TMP_Text m_WaypointLabel;
 
     [SerializeField]
     private TMP_Text m_TimerLabel;
@@ -20,25 +20,40 @@ public class HudView : UIView<IHudController>
 
     private void Awake()
     {
-        Assert.IsNotNull(m_ScoreLabel);
+        Assert.IsNotNull(m_WaypointLabel);
+        Assert.IsNotNull(m_TimerLabel);
     }
 
     protected override void OnWillShow()
     {
-        // Update widget states and contents
-        m_ScoreLabel.SetText(GetController().CurrentScore.ToString("N0"));
-
-        m_MotivationMeter.fillAmount = 0.5f;
+        Update();
     }
 
-    private void Update()
+    void Update()
     {
-        // Update timer
+        UpdateMotivation();
+        UpdateTimer();
+        UpdateWaypoints();
+    }
+
+    private void UpdateMotivation()
+    {
+        m_MotivationMeter.fillAmount = GetController().MotivationPercent;
+    }
+
+    private void UpdateTimer()
+    {
         TimeSpan elapsed = GetController().TimeElapsed;
         m_TimerLabel.SetText(
             elapsed.Hours.ToString("D2") + ":" +
             elapsed.Minutes.ToString("D2") + ":" +
             elapsed.Seconds.ToString("D2") + "." +
             (elapsed.Milliseconds / 10).ToString("D2"));
+    }
+
+    private void UpdateWaypoints()
+    {
+        m_WaypointLabel.SetText(
+            $"{GetController().CurrentWaypoint}/{GetController().WaypointCount}");
     }
 }
