@@ -77,12 +77,19 @@ public class CanoeController : MonoBehaviour
     {
         rowLeft.Disable();
         rowRight.Disable();
+        rowForward.Disable();
+        rowBackward.Disable();
+        switchSides.Disable();
     }
 
     private void OnDestroy()
     {
         rowLeft.performed -= OnRowLeft;
         rowRight.performed -= OnRowRight;
+
+        rowForward.performed -= OnRowForward;
+        rowBackward.performed -= OnRowBackward;
+        switchSides.performed -= OnSwitchSides;
     }
 
     // Update is called once per frame
@@ -127,7 +134,7 @@ public class CanoeController : MonoBehaviour
         Debug.Log("Row Forward " + (right ? "Right" : "Left"));
         rb.AddForce(speed.Value * transform.forward * -1);
         rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
-        rb.AddTorque(transform.up * torque.Value * (right ? -1 : 1 ));
+        rb.AddTorque(transform.up * torque.Value * (right ? 1 : -1 ));
 
     }
 
