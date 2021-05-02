@@ -64,18 +64,11 @@ public class GameController
         get { return (float)CurrentMotivation / (float)MaxMotivation; }
     }
 
-<<<<<<< Updated upstream
     public TimeSpan TimeElapsed
     {
         // TODO: Implement
         get { return new TimeSpan(0, 0, 0); }
     }
-=======
-
-    private float m_StartTime; // track start of race
-    private Scene m_TerrainScene;
-    private Scene m_RaceScene;
->>>>>>> Stashed changes
 
     void Awake()
     {
@@ -89,68 +82,38 @@ public class GameController
         m_Camera = Camera.main;
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
         playerTracker.trackedObject = m_Player;
-<<<<<<< Updated upstream
-        StartGame();
-=======
-        m_RaceScene = SceneManager.GetSceneByName("Basic");
-        m_TerrainScene = SceneManager.GetSceneByName("Terrain");
 
->>>>>>> Stashed changes
+        StartGame();
+        //m_RaceScene = SceneManager.GetSceneByName("Basic");
+        //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
+
     }
 
 
     public void StartGame()
     {
-<<<<<<< Updated upstream
         m_Session.Reset();
         Debug.Log("Start race! Scene: " + SceneManager.GetActiveScene().ToString());
-=======
-        Debug.Log("Start race! Scene: " + SceneManager.GetActiveScene().ToString());
-        m_StartTime =  Time.time;
 
     }
->>>>>>> Stashed changes
-
 
     public void OnFinishRace()
     {
-
         WinGame();
     }
 
-
-    public void WinGame()
-    {
-        float endTime = Time.time;
-        float raceTime = (endTime - m_StartTime);
-        Debug.Log("Race time: " + raceTime);
-        ResetGame();
-    }
 
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        
     }
 
 
-    public void OnFinishRace()
-    {
-        WinGame();
-    }
-
-
-    public void WinGame()
+     public void WinGame()
     {
         Debug.Log("Race time: " + m_Session.Elapsed().ToString());
         ResetGame();
     }
 
-    public void ResetGame()
-    {
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        StartGame();
-    }
 }
