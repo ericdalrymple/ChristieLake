@@ -31,7 +31,9 @@ public class GameController
 
     public static UIManager UIManager
     {
-        get { return Instance?.m_UIManager; }
+        get {
+            Assert.IsNotNull(Instance?.m_UIManager);
+            return Instance?.m_UIManager; }
     }
 
     public static string GameTitle
@@ -117,7 +119,7 @@ public class GameController
         Assert.IsNotNull(m_Player, "No player found in the scene.");
 
         m_WaypointManager = FindObjectOfType<Waypoints>();
-        Assert.IsNotNull(m_Player, "No race course found in the scene.");
+        Assert.IsNotNull(m_WaypointManager, "No race course found in the scene.");
 
         // Setup tracker
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();

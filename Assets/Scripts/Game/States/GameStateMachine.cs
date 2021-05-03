@@ -15,6 +15,7 @@ public class GameStateMachine : SingletonBehaviour<GameStateMachine>
     {
         if (handle != null)
         {
+            Debug.Log("Add state: " + state.ToString());
             m_StateLookup.Add(handle.Value, state);
         }
     }

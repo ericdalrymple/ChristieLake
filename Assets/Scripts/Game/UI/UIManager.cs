@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
 
     public void ClearViews()
     {
+        Debug.Log("UIManager::ClearViews()");
         // Hide all the view
         foreach (BaseUIView view in m_ViewLookup.Values)
         {
@@ -50,11 +51,13 @@ public class UIManager : MonoBehaviour
 
     public void Register(BaseUIView view)
     {
+        Debug.Log("UIManager::Register(view): " + view.ToString());
         m_ViewLookup.Add(view.Handle, view);
     }
 
     public void Unregister(BaseUIView view)
     {
+        Debug.Log("UIManager::Unregister(view): " + view.ToString());
         m_ViewLookup.Remove(view.Handle);
     }
 
@@ -90,6 +93,7 @@ public class UIManager : MonoBehaviour
         while (m_NavigationStack.Peek() == null || !m_ViewLookup.ContainsKey(m_NavigationStack.Peek().Handle))
         {
             // Pop destroyed or unregistered views from the top of the stack
+            Debug.Log("UIManager::PopInvalidViews() -- null or view not found in lookup");
             m_NavigationStack.Pop();
             popped = true;
         }
