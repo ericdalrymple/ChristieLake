@@ -89,21 +89,21 @@ public class GameController
         Assert.IsNotNull(m_Session, "Must add a GameSession component onto the GameController.");
 
         m_UIManager = GetComponent<UIManager>();
-        Assert.IsNotNull(m_UIManager, "Must add a GameSession component onto the GameController.");
+        Assert.IsNotNull(m_UIManager, "Must add a UIManager component onto the GameController.");
 
         // Cache scenes
         //m_RaceScene = SceneManager.GetSceneByName("Basic");
         //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
         //m_PropsScene = SceneManager.GetSceneByName("Props");
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
-        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
-        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
     protected override void OnSceneLoaded()
