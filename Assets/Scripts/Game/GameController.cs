@@ -31,7 +31,9 @@ public class GameController
 
     public static UIManager UIManager
     {
-        get { return Instance?.m_UIManager; }
+        get {
+            Assert.IsNotNull(Instance?.m_UIManager);
+            return Instance?.m_UIManager; }
     }
 
     public static string GameTitle
@@ -89,21 +91,21 @@ public class GameController
         Assert.IsNotNull(m_Session, "Must add a GameSession component onto the GameController.");
 
         m_UIManager = GetComponent<UIManager>();
-        Assert.IsNotNull(m_UIManager, "Must add a GameSession component onto the GameController.");
+        Assert.IsNotNull(m_UIManager, "Must add a UIManager component onto the GameController.");
 
         // Cache scenes
         //m_RaceScene = SceneManager.GetSceneByName("Basic");
         //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
         //m_PropsScene = SceneManager.GetSceneByName("Props");
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
-        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
-        SceneManager.LoadScene(3, LoadSceneMode.Additive);
     }
 
     protected override void OnSceneLoaded()
@@ -117,7 +119,7 @@ public class GameController
         Assert.IsNotNull(m_Player, "No player found in the scene.");
 
         m_WaypointManager = FindObjectOfType<Waypoints>();
-        Assert.IsNotNull(m_Player, "No race course found in the scene.");
+        Assert.IsNotNull(m_WaypointManager, "No race course found in the scene.");
 
         // Setup tracker
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();

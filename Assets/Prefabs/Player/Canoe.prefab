@@ -165,36 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActionAsset: {fileID: -944628639613478452, guid: 0f4423cd2e8a44b428a457613fe9e340, type: 3}
---- !u!111 &1152110353491027529
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4462478744380412967}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 1827226128182048838, guid: 983a78df95a1df54fb083a7c218dda1c, type: 3}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
---- !u!111 &3787786186931511977
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964982558201600351}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 1827226128182048838, guid: 983a78df95a1df54fb083a7c218dda1c, type: 3}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &6605238711479906577
 GameObject:
   m_ObjectHideFlags: 0
