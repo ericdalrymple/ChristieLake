@@ -83,7 +83,8 @@ public class UIManager : MonoBehaviour
         }
 
         BaseUIView view = null;
-        Assert.IsTrue(m_ViewLookup.TryGetValue(viewHandle.Value, out view), $"No registered dialog with handle '{viewHandle}'.");
+        var val = m_ViewLookup.TryGetValue(viewHandle.Value, out view);
+        Assert.IsTrue(val, $"No registered dialog with handle '{viewHandle}'.");
 
         if ((view != null) && (view != CurrentDialog))
         {
