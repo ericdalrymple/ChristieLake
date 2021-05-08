@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public class UIViewCollection : MonoBehaviour
@@ -7,23 +8,17 @@ public class UIViewCollection : MonoBehaviour
     [SerializeField]
     private BaseUIView[] m_Views = new BaseUIView[0];
 
-    void Awake()
+    public ReadOnlyCollection<BaseUIView> Views
     {
-        foreach (BaseUIView view in m_Views)
-        {
-            if (view != null)
-            {
-                view.Hide();
-                GameController.UIManager.Register(view);
-            }
-        }
+        get { return new ReadOnlyCollection<BaseUIView>(m_Views); }
     }
 
-    void OnDestroy()
+    void Start()
     {
+        // Hide all views to ease iteration
         foreach (BaseUIView view in m_Views)
         {
-            GameController.UIManager.Unregister(view);
+            view.Hide();
         }
     }
 }

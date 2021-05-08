@@ -160,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_InitialState: {fileID: 11400000, guid: 53799ccca8c84d84c9b1dda0eca5763a, type: 2}
+  m_RetryState: {fileID: 11400000, guid: 2d90c2f20e24afd469f263e1023e3208, type: 2}
 --- !u!114 &1306695906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +180,10 @@ MonoBehaviour:
   m_MotivationDecayRate:
     useConstant: 1
     constant: 100
+    variable: {fileID: 0}
+  m_BuoyScore:
+    useConstant: 1
+    constant: 250
     variable: {fileID: 0}
 --- !u!114 &7326386647792818080
 MonoBehaviour:

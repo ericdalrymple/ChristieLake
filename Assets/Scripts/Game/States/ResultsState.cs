@@ -65,6 +65,5 @@ public class ResultsState : GameState, IUIController
     public void OnConfirmInput(InputAction.CallbackContext context)
     {
         GameController.Instance.ResetGame();
-        StateMachine.SetCurrentState(m_StartGameState);
     }
 }

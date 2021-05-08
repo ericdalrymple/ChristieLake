@@ -21,6 +21,7 @@ public class GameController
     private Camera m_Camera;
     private CanoeController m_Player;
     private GameSession m_Session;
+    private GameStateMachine m_StateMachine;
     private UIManager m_UIManager;
     private Waypoints m_WaypointManager;
 
@@ -69,6 +70,11 @@ public class GameController
         get { return m_WaypointManager.Completed; }
     }
 
+    public GameObject NextWaypoint
+    {
+        get { return m_WaypointManager.NextWaypoint; }
+    }
+
     public int WaypointCount
     {
         get { return m_WaypointManager.Count; }
@@ -84,23 +90,6 @@ public class GameController
         return m_Player.gameObject;
     }
 
-    void Awake()
-    {
-        // Cache local components
-        m_Session = GetComponent<GameSession>();
-        Assert.IsNotNull(m_Session, "Must add a GameSession component onto the GameController.");
-
-        m_UIManager = GetComponent<UIManager>();
-        Assert.IsNotNull(m_UIManager, "Must add a UIManager component onto the GameController.");
-
-        // Cache scenes
-        //m_RaceScene = SceneManager.GetSceneByName("Basic");
-        //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
-        //m_PropsScene = SceneManager.GetSceneByName("Props");
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);
-    }
-
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
@@ -111,7 +100,7 @@ public class GameController
     protected override void OnSceneLoaded()
     {
         // Wipe the session
-        m_Session.Reset();
+        m_Session.ResetValues();
 
         // Cache scene objects
         m_Camera = Camera.main;
@@ -120,9 +109,47 @@ public class GameController
 
         m_WaypointManager = FindObjectOfType<Waypoints>();
         Assert.IsNotNull(m_WaypointManager, "No race course found in the scene.");
+        m_WaypointManager.Initialize();
+
+        // Setup UI
+        UIViewCollection viewColltection = FindObjectOfType<UIViewCollection>();
+        Assert.IsNotNull(viewColltection, "Must add a UIViewCollection to the scene.");
+        m_UIManager.UnregisterViews();
+        m_UIManager.Register(viewColltection.Views);
 
         // Setup tracker
         PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
         playerTracker.trackedObject = GetPlayer();
+
+        // Reset the game state
+        m_StateMachine.StartRetry();
+    }
+
+    void Awake()
+    {
+        // Cache/initialize local components
+        m_Session = GetComponent<GameSession>();
+        Assert.IsNotNull(m_Session, "Must add a GameSession component onto the GameController.");
+
+        m_StateMachine = GetComponent<GameStateMachine>();
+        Assert.IsNotNull(m_StateMachine, "Must add a GameStateMachine component onto the GameController.");
+        m_StateMachine.Initialize();
+
+        m_UIManager = GetComponent<UIManager>();
+        Assert.IsNotNull(m_UIManager, "Must add a UIManager component onto the GameController.");
+
+        // Load scenes
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+
+        // Cache scenes
+        //m_RaceScene = SceneManager.GetSceneByName("Basic");
+        //m_TerrainScene = SceneManager.GetSceneByName("Terrain");
+        //m_PropsScene = SceneManager.GetSceneByName("Props");
+    }
+
+    void Update()
+    {
+        m_StateMachine.Tick();
     }
 }

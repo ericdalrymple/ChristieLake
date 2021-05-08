@@ -46,7 +46,7 @@ public class GameSession : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetValues()
     {
         m_Motivation = 0.0f;
         m_Score = 0;

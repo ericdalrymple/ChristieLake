@@ -10,8 +10,6 @@ public class Waypoints : MonoBehaviour
 
     private GameObject nextWaypoint;
 
-    private WaypointPointer waypointPointer;
-
     public int Count
     {
         get { return m_TotalWaypointCount; }
@@ -27,11 +25,14 @@ public class Waypoints : MonoBehaviour
         get { return waypoints.Count; }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public GameObject NextWaypoint
     {
-        waypointPointer = GameController.Instance.GetPlayer().GetComponentInChildren<WaypointPointer>();
+        get { return nextWaypoint; }
+    }
 
+    // Start is called before the first frame update
+    public void Initialize()
+    {
         waypoints = new Queue<GameObject>();
 
         foreach (Transform child in transform)
@@ -45,9 +46,6 @@ public class Waypoints : MonoBehaviour
         
         nextWaypoint = waypoints.Dequeue();
         nextWaypoint.SetActive(true);
-
-        waypointPointer.target = nextWaypoint;
-          
     }
 
 
@@ -60,14 +58,13 @@ public class Waypoints : MonoBehaviour
         if (waypoints.Count > 0)
         {
             nextWaypoint = waypoints.Dequeue();
-            waypointPointer.target = nextWaypoint;
             nextWaypoint.SetActive(true);
             GameController.GameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_REACHED, null, SendMessageOptions.DontRequireReceiver);
+            transform.parent.gameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_REACHED, null, SendMessageOptions.DontRequireReceiver);
         }
         else
         // empty 
         {
-            waypointPointer.target = null;
             Debug.Log("Finished Race!");
             GameController.GameObject.BroadcastMessage(GameMessages.MSG_RACE_FINISHED, null, SendMessageOptions.DontRequireReceiver);
         }

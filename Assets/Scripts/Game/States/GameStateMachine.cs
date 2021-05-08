@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class GameStateMachine : SingletonBehaviour<GameStateMachine>
 {
     [SerializeField]
     private GameStateHandle m_InitialState;
+
+    [SerializeField]
+    private GameStateHandle m_RetryState;
 
     protected Dictionary<string, GameState> m_StateLookup = new Dictionary<string, GameState>();
 
@@ -49,7 +53,7 @@ public class GameStateMachine : SingletonBehaviour<GameStateMachine>
         }
     }
 
-    void Awake()
+    public void Initialize()
     {
         // Register states
         GameState[] states = gameObject.GetComponentsInChildren<GameState>(false);
@@ -60,20 +64,28 @@ public class GameStateMachine : SingletonBehaviour<GameStateMachine>
         }
     }
 
-    void Start()
+    public void StartRetry()
     {
-        if (m_InitialState != null)
-        {
-            SetCurrentState(m_InitialState);
-        }
+        SetCurrentState(m_RetryState);
     }
 
-    void Update()
+    public void Tick()
     {
         if (m_CurrentState != null)
         {
-            m_CurrentState.Update();
+            m_CurrentState.Tick();
         }
+    }
+
+    void Awake()
+    {
+        Assert.IsNotNull(m_InitialState, "Must specify an initial state.");
+        Assert.IsNotNull(m_RetryState, "Must specify the state the game goes to on retry.");
+    }
+
+    void Start()
+    {
+        SetCurrentState(m_InitialState);
     }
 
     void FixedUpdate()

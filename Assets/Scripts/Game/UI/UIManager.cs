@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         // Hide all the view
         foreach (BaseUIView view in m_ViewLookup.Values)
         {
-            view?.Hide();
+            //view?.Hide();
         }
 
         // Clear the nav stack
@@ -49,16 +49,29 @@ public class UIManager : MonoBehaviour
         CurrentDialog?.Show();
     }
 
-    public void Register(BaseUIView view)
+    public void Register(IEnumerable<BaseUIView> views)
     {
-        Debug.Log("UIManager::Register(view): " + view.ToString());
-        m_ViewLookup.Add(view.Handle, view);
+        foreach (BaseUIView view in views)
+        {
+            if (view != null)
+            {
+                Debug.Log("UIManager::Register(view): " + view.ToString());
+                m_ViewLookup.Add(view.Handle, view);
+            }
+        }
     }
 
-    public void Unregister(BaseUIView view)
+    public void UnregisterViews()
     {
-        Debug.Log("UIManager::Unregister(view): " + view.ToString());
-        m_ViewLookup.Remove(view.Handle);
+        foreach (BaseUIView view in m_ViewLookup.Values)
+        {
+            if (view != null)
+            {
+                Debug.Log("UIManager::Unregister(view): " + view.ToString());
+            }
+        }
+
+        m_ViewLookup.Clear();
     }
 
     public BaseUIView ShowDialog(UIHandle viewHandle, IUIController controller)
@@ -99,5 +112,10 @@ public class UIManager : MonoBehaviour
         }
 
         return popped;
+    }
+
+    void Update()
+    {
+        CurrentDialog?.Tick();
     }
 }

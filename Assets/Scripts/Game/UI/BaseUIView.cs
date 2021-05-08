@@ -23,4 +23,5 @@ public abstract class BaseUIView : MonoBehaviour
 
     public abstract void Hide();
     public abstract void Show();
+    public virtual void Tick() { }
 }

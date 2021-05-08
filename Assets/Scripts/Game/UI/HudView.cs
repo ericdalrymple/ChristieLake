@@ -30,10 +30,15 @@ public class HudView : UIView<IHudController>
 
     protected override void OnWillShow()
     {
-        Update();
+        UpdateValues();
     }
 
-    void Update()
+    public override void Tick()
+    {
+        UpdateValues();
+    }
+
+    private void UpdateValues()
     {
         UpdateMotivation();
         UpdateScore();
