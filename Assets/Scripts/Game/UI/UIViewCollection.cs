@@ -12,13 +12,4 @@ public class UIViewCollection : MonoBehaviour
     {
         get { return new ReadOnlyCollection<BaseUIView>(m_Views); }
     }
-
-    void Start()
-    {
-        // Hide all views to ease iteration
-        foreach (BaseUIView view in m_Views)
-        {
-            view.Hide();
-        }
-    }
 }

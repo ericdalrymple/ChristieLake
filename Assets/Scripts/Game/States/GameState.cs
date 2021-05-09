@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GameState : MonoBehaviour
 {
     [SerializeField]
-    private GameStateHandle m_Handle;
+    private GameStateHandle m_Handle = null;
 
     public string Handle
     {

@@ -1,4 +1,3 @@
-using PocketValues.Types;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +28,7 @@ public class UIManager : MonoBehaviour
         // Hide all the view
         foreach (BaseUIView view in m_ViewLookup.Values)
         {
-            //view?.Hide();
+            view?.Hide();
         }
 
         // Clear the nav stack
@@ -83,8 +82,8 @@ public class UIManager : MonoBehaviour
         }
 
         BaseUIView view = null;
-        var val = m_ViewLookup.TryGetValue(viewHandle.Value, out view);
-        Assert.IsTrue(val, $"No registered dialog with handle '{viewHandle}'.");
+        bool viewFound = m_ViewLookup.TryGetValue(viewHandle.Value, out view);
+        Assert.IsTrue(viewFound, $"No registered dialog with handle '{viewHandle}'.");
 
         if ((view != null) && (view != CurrentDialog))
         {
@@ -100,6 +99,17 @@ public class UIManager : MonoBehaviour
         return view;
     }
 
+    public void Tick()
+    {
+        foreach (BaseUIView view in m_ViewLookup.Values)
+        {
+            if (view != null && view.IsVisible)
+            {
+                view.Tick();
+            }
+        }
+    }
+
     private bool PopInvalidViews()
     {
         bool popped = false;
@@ -113,10 +123,5 @@ public class UIManager : MonoBehaviour
         }
 
         return popped;
-    }
-
-    void Update()
-    {
-        CurrentDialog?.Tick();
     }
 }

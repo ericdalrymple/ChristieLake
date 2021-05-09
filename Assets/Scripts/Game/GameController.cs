@@ -1,7 +1,5 @@
 using PocketValues.Types;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions;
@@ -23,7 +21,9 @@ public class GameController
     private GameSession m_Session;
     private GameStateMachine m_StateMachine;
     private UIManager m_UIManager;
+    private UIViewCollection m_ViewCollection;
     private Waypoints m_WaypointManager;
+
 
     public static GameObject GameObject
     {
@@ -90,6 +90,30 @@ public class GameController
         return m_Player.gameObject;
     }
 
+    public void NotifyMotivationChanged()
+    {
+        gameObject.BroadcastMessage(GameMessages.MSG_MOTIVATION_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+        m_ViewCollection.BroadcastMessage(GameMessages.MSG_MOTIVATION_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+    }
+
+    public void NotifyProgressChanged()
+    {
+        gameObject.BroadcastMessage(GameMessages.MSG_PROGRESS_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+        m_ViewCollection.BroadcastMessage(GameMessages.MSG_PROGRESS_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+    }
+
+    public void NotifyScoreChanged()
+    {
+        gameObject.BroadcastMessage(GameMessages.MSG_SCORE_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+        m_ViewCollection.BroadcastMessage(GameMessages.MSG_SCORE_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+    }
+
+    public void NotifyTimeChanged()
+    {
+        gameObject.BroadcastMessage(GameMessages.MSG_TIME_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+        m_ViewCollection.BroadcastMessage(GameMessages.MSG_TIME_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+    }
+
     public void ResetGame()
     {
         SceneManager.LoadScene(0, LoadSceneMode.Single);
@@ -99,9 +123,6 @@ public class GameController
 
     protected override void OnSceneLoaded()
     {
-        // Wipe the session
-        m_Session.ResetValues();
-
         // Cache scene objects
         m_Camera = Camera.main;
         m_Player = FindObjectOfType<CanoeController>(false);
@@ -112,17 +133,23 @@ public class GameController
         m_WaypointManager.Initialize();
 
         // Setup UI
-        UIViewCollection viewColltection = FindObjectOfType<UIViewCollection>();
-        Assert.IsNotNull(viewColltection, "Must add a UIViewCollection to the scene.");
-        m_UIManager.UnregisterViews();
-        m_UIManager.Register(viewColltection.Views);
+        m_ViewCollection = FindObjectOfType<UIViewCollection>();
+        Assert.IsNotNull(m_ViewCollection, "Must add a UIViewCollection to the scene.");
 
-        // Setup tracker
-        PlayerTracker playerTracker = m_Camera.GetComponent<PlayerTracker>();
-        playerTracker.trackedObject = GetPlayer();
+        m_UIManager.UnregisterViews();
+        m_UIManager.Register(m_ViewCollection.Views);
+        m_UIManager.ClearViews();
+
+        // Wipe the session
+        m_Session.ResetValues();
 
         // Reset the game state
         m_StateMachine.StartRetry();
+    }
+
+    void OnWaypointChanged()
+    {
+        NotifyProgressChanged();
     }
 
     void Awake()
@@ -151,5 +178,6 @@ public class GameController
     void Update()
     {
         m_StateMachine.Tick();
+        m_UIManager.Tick();
     }
 }

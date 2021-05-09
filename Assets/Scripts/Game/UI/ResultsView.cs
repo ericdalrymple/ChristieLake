@@ -1,16 +1,14 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class ResultsView : UIView<IResultsController>
 {
     [SerializeField]
-    private TMP_Text m_ScoreLabel;
+    private TMP_Text m_ScoreLabel = null;
 
     [SerializeField]
-    private TMP_Text m_TimeLabel;
+    private TMP_Text m_TimeLabel = null;
 
     protected override void OnWillShow()
     {

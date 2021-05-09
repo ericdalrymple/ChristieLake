@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(GameController))]
 public class GameSession : MonoBehaviour
 {
     [SerializeField]
@@ -17,10 +18,11 @@ public class GameSession : MonoBehaviour
 
     private float m_LastTime;
     private float m_Motivation;
-    private int m_Score;
+    private float m_Score;
     private float m_SessionStartTime;
-
     private bool m_TrackTime = false;
+
+    private GameController m_Controller;
 
     public int MaxMotivation
     {
@@ -34,23 +36,82 @@ public class GameSession : MonoBehaviour
 
     public int CurrentScore
     {
+        get { return (int)m_Score; }
+    }
+
+    private float LastTime
+    {
+        get { return m_LastTime; }
+        set
+        {
+            m_LastTime = value;
+            m_Controller.NotifyTimeChanged();
+        }
+    }
+
+    private float Motivation
+    {
+        get { return m_Motivation; }
+        set
+        {
+            int previousMotivation = (int)m_Motivation;
+            m_Motivation = value;
+
+            if ((int)m_Motivation != previousMotivation)
+            {
+                m_Controller.NotifyMotivationChanged();
+            }
+        }
+    }
+
+    private float Score
+    {
         get { return m_Score; }
+        set
+        {
+            int previousScore = (int)m_Score;
+            m_Score = value;
+
+            if ((int)m_Score != previousScore)
+            {
+                m_Controller.NotifyScoreChanged();
+            }
+        }
+    }
+
+    private float StartTime
+    {
+        get { return m_SessionStartTime; }
+        set
+        {
+            if (m_SessionStartTime != value)
+            {
+                m_SessionStartTime = value;
+                m_Controller.NotifyTimeChanged();
+            }
+        }
     }
 
     public TimeSpan ElapsedTime
     {
         get
         {
-            float elapsed = m_LastTime - m_SessionStartTime;
+            float elapsed = LastTime - StartTime;
             return TimeSpan.FromSeconds(elapsed);
         }
     }
 
     public void ResetValues()
     {
-        m_Motivation = 0.0f;
-        m_Score = 0;
-        m_SessionStartTime = 0.0f;
+        Motivation = 0.0f;
+        Score = 0.0f;
+        StartTime = 0.0f;
+        LastTime = 0.0f;
+    }
+
+    private void Awake()
+    {
+        m_Controller = GetComponent<GameController>();
     }
 
     void Update()
@@ -58,14 +119,14 @@ public class GameSession : MonoBehaviour
         if (m_TrackTime)
         {
             // Update the race duration
-            m_LastTime = Time.time;
+            LastTime = Time.time;
 
             // Decay motivation
             float decayAmount = m_MotivationDecayRate.Value * Time.deltaTime;
-            m_Motivation -= decayAmount;
-            if (m_Motivation < 0.0f)
+            Motivation -= decayAmount;
+            if (Motivation < 0.0f)
             {
-                m_Motivation = 0.0f;
+                Motivation = 0.0f;
             }
         }
     }
@@ -73,7 +134,7 @@ public class GameSession : MonoBehaviour
     public void OnStartRace()
     {
         m_TrackTime = true;
-        m_SessionStartTime = m_LastTime = Time.time;
+        StartTime = LastTime = Time.time;
     }
 
     public void OnFinishRace()
@@ -81,13 +142,16 @@ public class GameSession : MonoBehaviour
         m_TrackTime = false;
     }
 
-    public void OnReachWaypoint()
+    public void OnWaypointChanged()
     {
         float motivationPercent = (m_MaxMotivation.Value == 0) ?
             0 :
-            m_Motivation / (float)m_MaxMotivation.Value;
+            Motivation / (float)m_MaxMotivation.Value;
 
-        m_Score += (int)(m_BuoyScore.Value * (1.0f + motivationPercent));
-        m_Motivation = m_MaxMotivation.Value;
+        // Score the buoy
+        Score += (int)(m_BuoyScore.Value * (1.0f + motivationPercent));
+
+        // Fill up motivation
+        Motivation = m_MaxMotivation.Value;
     }
 }

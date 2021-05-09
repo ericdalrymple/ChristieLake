@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using PocketValues.Types;
 using UnityEngine.InputSystem;
@@ -7,101 +6,91 @@ using UnityEngine.Assertions;
 
 public class CanoeController : MonoBehaviour
 {
-
-    Rigidbody rb;
+    [SerializeField]
+    FloatReference m_Speed = new FloatReference(1.0f);
 
     [SerializeField]
-    FloatReference speed = new FloatReference(1.0f);
+    FloatReference m_LateralSpeed = new FloatReference(1.0f);
 
     [SerializeField]
-    FloatReference lateralSpeed = new FloatReference(1.0f);
+    FloatReference m_Torque = new FloatReference(1.0f);
 
     [SerializeField]
-    FloatReference torque = new FloatReference(1.0f);
-
-
-    [SerializeField]
-    InputActionAsset inputActionAsset;
+    InputActionAsset m_InputActionAsset = null;
 
     [SerializeField]
-    public Transform target;
-
-
-    InputAction rowLeft;
-    InputAction rowRight;
-
-    InputAction rowForward;
-    InputAction rowBackward;
-    InputAction switchSides;
-
-
-    private bool right = true;
-
-    //private Animation m_RowAnimation;
+    private GameObject m_PaddleLeft = null;
 
     [SerializeField]
-    private GameObject m_PaddleLeft;
-    [SerializeField]
-    private GameObject m_PaddleRight;
+    private GameObject m_PaddleRight = null;
+
+    private InputAction m_RowLeft;
+    private InputAction m_RowRight;
+    private InputAction m_RowForward;
+    private InputAction m_RowBackward;
+    private InputAction m_SwitchSides;
+
+    private bool m_IsPaddleOnRightSide = true;
+    private Rigidbody m_Body;
 
     // Start is called before the first frame update
     void Awake()
     {
-        Assert.IsNotNull(inputActionAsset, "Need inputActionAsset");
+        Assert.IsNotNull(m_InputActionAsset, "Need inputActionAsset");
         Assert.IsNotNull(m_PaddleLeft, "Canoe needs reference to Left paddle game object");
         Assert.IsNotNull(m_PaddleRight, "Canoe needs reference to Right paddle game object");
         m_PaddleLeft.SetActive(false);
         m_PaddleRight.SetActive(false);
 
-        rb = GetComponentInChildren<Rigidbody>();
+        m_Body = GetComponentInChildren<Rigidbody>();
 
         //m_RowAnimation = GetComponentInChildren<Animation>(); // won't work: two paddles each have an animation. need to get from each paddle
 
-        var gameplayActionMap = inputActionAsset.FindActionMap("Player");
+        InputActionMap gameplayActionMap = m_InputActionAsset.FindActionMap("Player");
 
-        rowLeft = gameplayActionMap.FindAction("Row Left");
-        rowRight = gameplayActionMap.FindAction("Row Right");
+        m_RowLeft = gameplayActionMap.FindAction("Row Left");
+        m_RowRight = gameplayActionMap.FindAction("Row Right");
 
-        rowForward = gameplayActionMap.FindAction("Row Forward");
-        rowBackward = gameplayActionMap.FindAction("Row Backward");
+        m_RowForward = gameplayActionMap.FindAction("Row Forward");
+        m_RowBackward = gameplayActionMap.FindAction("Row Backward");
 
-        switchSides = gameplayActionMap.FindAction("Switch Sides");
+        m_SwitchSides = gameplayActionMap.FindAction("Switch Sides");
 
-        rowForward.performed += OnRowForward;
-        rowBackward.performed += OnRowBackward;
-        switchSides.performed += OnSwitchSides;
+        m_RowForward.performed += OnRowForward;
+        m_RowBackward.performed += OnRowBackward;
+        m_SwitchSides.performed += OnSwitchSides;
 
-        rowLeft.performed += OnRowLeft;
-        rowRight.performed += OnRowRight;
+        m_RowLeft.performed += OnRowLeft;
+        m_RowRight.performed += OnRowRight;
     }
 
     private void OnEnable()
     {
-        rowLeft.Enable();
-        rowRight.Enable();
-        rowForward.Enable();
-        rowBackward.Enable();
-        switchSides.Enable();
+        m_RowLeft.Enable();
+        m_RowRight.Enable();
+        m_RowForward.Enable();
+        m_RowBackward.Enable();
+        m_SwitchSides.Enable();
 
     }
 
     private void OnDisable()
     {
-        rowLeft.Disable();
-        rowRight.Disable();
-        rowForward.Disable();
-        rowBackward.Disable();
-        switchSides.Disable();
+        m_RowLeft.Disable();
+        m_RowRight.Disable();
+        m_RowForward.Disable();
+        m_RowBackward.Disable();
+        m_SwitchSides.Disable();
     }
 
     private void OnDestroy()
     {
-        rowLeft.performed -= OnRowLeft;
-        rowRight.performed -= OnRowRight;
+        m_RowLeft.performed -= OnRowLeft;
+        m_RowRight.performed -= OnRowRight;
 
-        rowForward.performed -= OnRowForward;
-        rowBackward.performed -= OnRowBackward;
-        switchSides.performed -= OnSwitchSides;
+        m_RowForward.performed -= OnRowForward;
+        m_RowBackward.performed -= OnRowBackward;
+        m_SwitchSides.performed -= OnSwitchSides;
     }
 
     // Update is called once per frame
@@ -120,46 +109,46 @@ public class CanoeController : MonoBehaviour
     public void OnRowLeft(InputAction.CallbackContext context)
     {
         //print("Row Left");
-        rb.AddForce(speed.Value * transform.forward);
-        rb.AddForce(0.2f * speed.Value * transform.right);
-        rb.AddTorque(transform.up * torque.Value * 1f);
+        m_Body.AddForce(m_Speed.Value * transform.forward);
+        m_Body.AddForce(0.2f * m_Speed.Value * transform.right);
+        m_Body.AddTorque(transform.up * m_Torque.Value * 1f);
     }
 
     public void OnRowRight(InputAction.CallbackContext context)
     {
         //print("Row Right");
-        rb.AddForce(speed.Value * transform.forward);
-        rb.AddForce(0.2f * speed.Value * transform.right * -1);
-        rb.AddTorque(transform.up * torque.Value * -1f);
+        m_Body.AddForce(m_Speed.Value * transform.forward);
+        m_Body.AddForce(0.2f * m_Speed.Value * transform.right * -1);
+        m_Body.AddTorque(transform.up * m_Torque.Value * -1f);
     }
 
     public void OnRowForward(InputAction.CallbackContext context)
     {
-        StartCoroutine(Row(right));
+        StartCoroutine(Row(m_IsPaddleOnRightSide));
         //m_RowAnimation.Play();
         //Debug.Log("Row Forward " + ( right ? "Right" : "Left"));
-        rb.AddForce(speed.Value * transform.forward);
-        rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
-        rb.AddTorque(transform.up * torque.Value * (right ? -1 : 1));
+        m_Body.AddForce(m_Speed.Value * transform.forward);
+        m_Body.AddForce(0.2f * m_LateralSpeed.Value * (m_IsPaddleOnRightSide ? -1 * transform.right : transform.right ));
+        m_Body.AddTorque(transform.up * m_Torque.Value * (m_IsPaddleOnRightSide ? -1 : 1));
     }
 
     public void OnRowBackward(InputAction.CallbackContext context)
     {
-        StartCoroutine(Row(right));
+        StartCoroutine(Row(m_IsPaddleOnRightSide));
         //m_RowAnimation.Play();
         //Debug.Log("Row Forward " + (right ? "Right" : "Left"));
-        rb.AddForce(speed.Value * transform.forward * -1);
-        rb.AddForce(0.2f * lateralSpeed.Value * (right ? -1 * transform.right : transform.right ));
-        rb.AddTorque(transform.up * torque.Value * (right ? 1 : -1 ));
+        m_Body.AddForce(m_Speed.Value * transform.forward * -1);
+        m_Body.AddForce(0.2f * m_LateralSpeed.Value * (m_IsPaddleOnRightSide ? -1 * transform.right : transform.right ));
+        m_Body.AddTorque(transform.up * m_Torque.Value * (m_IsPaddleOnRightSide ? 1 : -1 ));
 
     }
 
     public void OnSwitchSides(InputAction.CallbackContext context)
     {
         
-        right = !right;
-        StartCoroutine(Row(right));
-        Debug.Log("Switch to " + (right ? "Right" : "Left"));
+        m_IsPaddleOnRightSide = !m_IsPaddleOnRightSide;
+        StartCoroutine(Row(m_IsPaddleOnRightSide));
+        Debug.Log("Switch to " + (m_IsPaddleOnRightSide ? "Right" : "Left"));
     }
 
     public IEnumerator Row(bool right)

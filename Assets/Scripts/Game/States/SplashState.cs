@@ -1,21 +1,16 @@
-using PocketValues.Types;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SplashState : GameState, IUIController
 {
     [SerializeField]
-    private GameStateHandle m_StartGameState;
+    private GameStateHandle m_StartGameState = null;
 
     [SerializeField]
-    private UIHandle m_SplashViewHandle;
+    private UIHandle m_SplashViewHandle = null;
 
     [SerializeField]
-    private InputActionAsset m_InputActions;
-
-    private InputAction m_ConfirmInput;
+    private InputActionAsset m_InputActions = null;
 
     public string GameTitle
     {

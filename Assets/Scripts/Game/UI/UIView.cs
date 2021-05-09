@@ -26,28 +26,6 @@ public abstract class UIView<ControllerType> : BaseUIView where ControllerType :
         }
     }
 
-    public override void Hide()
-    {
-        gameObject.SetActive(false);
-        OnWillHide();
-        OnHidden();
-    }
-
-    public override void Show()
-    {
-        gameObject.SetActive(true);
-        OnWillShow();
-        OnShown();
-    }
-
-    protected virtual void OnWillShow() {}
-
-    protected virtual void OnShown() {}
-
-    protected virtual void OnWillHide() {}
-
-    protected virtual void OnHidden() {}
-
     protected ControllerType GetController()
     {
         return m_Controller;

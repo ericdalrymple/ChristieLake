@@ -296,22 +296,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a97fe5a26b4304ba685b94410384a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed:
+  m_Speed:
     useConstant: 0
     constant: 1
     variable: {fileID: 11400000, guid: e139bdfd90831a54794da2ac80a102f7, type: 2}
-  lateralSpeed:
+  m_LateralSpeed:
     useConstant: 0
     constant: 1
     variable: {fileID: 11400000, guid: 4ed010eb817d96246a2d09d85e92c7f8, type: 2}
-  torque:
+  m_Torque:
     useConstant: 0
     constant: 1
     variable: {fileID: 11400000, guid: 418f7fbef1a3f794980a7f84e8ef6d7f, type: 2}
-  inputActionAsset: {fileID: -944628639613478452, guid: 0f4423cd2e8a44b428a457613fe9e340, type: 3}
-  target: {fileID: 6605238711479906576}
+  m_InputActionAsset: {fileID: -944628639613478452, guid: 0f4423cd2e8a44b428a457613fe9e340, type: 3}
   m_PaddleLeft: {fileID: 4462478744380412967}
   m_PaddleRight: {fileID: 4964982558201600351}
+  m_Target: {fileID: 6605238712044512919}
 --- !u!54 &5294568958810712929
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -453,8 +453,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16f7eb90452a164a8d87209a70f01a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  m_Player: {fileID: 0}
 --- !u!1001 &2154464857596904006
 PrefabInstance:
   m_ObjectHideFlags: 0

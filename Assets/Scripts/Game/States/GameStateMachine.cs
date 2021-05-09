@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -6,10 +5,10 @@ using UnityEngine.Assertions;
 public class GameStateMachine : SingletonBehaviour<GameStateMachine>
 {
     [SerializeField]
-    private GameStateHandle m_InitialState;
+    private GameStateHandle m_InitialState = null;
 
     [SerializeField]
-    private GameStateHandle m_RetryState;
+    private GameStateHandle m_RetryState = null;
 
     protected Dictionary<string, GameState> m_StateLookup = new Dictionary<string, GameState>();
 

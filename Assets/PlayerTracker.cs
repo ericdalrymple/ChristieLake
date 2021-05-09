@@ -1,17 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 // reference :: https://learn.unity.com/tutorial/controlling-unity-camera-behaviour#5fc3f6a3edbc2a459f91c6ae
 public class PlayerTracker : MonoBehaviour
 {
-    public GameObject trackedObject;
-    //public float maxDistance = 10;
-    //public float moveSpeed = 100;
-    //public float updateSpeed = 1000;
+    [SerializeField]
+    private Transform m_PlayerTransform = null;
 
-//    [Range(0, 10)]
     private GameObject target;
     
     [SerializeField]
@@ -33,13 +27,12 @@ public class PlayerTracker : MonoBehaviour
 
     private void LateUpdate()
     {
-        float distance = Vector3.Distance(transform.position, trackedObject.transform.position);
+        float distance = Vector3.Distance(transform.position, m_PlayerTransform.position);
         float cameraSpeed = Mathf.Pow(distance / cameraDistance, 1.75f);
 
+        target.transform.position = m_PlayerTransform.position + targetHeightOffset * Vector3.up;
 
-        target.transform.position = trackedObject.transform.position + targetHeightOffset * Vector3.up;
-
-        Vector3 newCameraPosition = trackedObject.transform.position + cameraHeight * Vector3.up - cameraDistance * trackedObject.transform.forward;
+        Vector3 newCameraPosition = m_PlayerTransform.position + cameraHeight * Vector3.up - cameraDistance * m_PlayerTransform.forward;
         transform.position = Vector3.MoveTowards(transform.position, newCameraPosition, cameraSpeed * Time.deltaTime);
 
         transform.LookAt(target.transform);

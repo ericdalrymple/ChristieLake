@@ -30,7 +30,6 @@ public class Waypoints : MonoBehaviour
         get { return nextWaypoint; }
     }
 
-    // Start is called before the first frame update
     public void Initialize()
     {
         waypoints = new Queue<GameObject>();
@@ -59,8 +58,8 @@ public class Waypoints : MonoBehaviour
         {
             nextWaypoint = waypoints.Dequeue();
             nextWaypoint.SetActive(true);
-            GameController.GameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_REACHED, null, SendMessageOptions.DontRequireReceiver);
-            transform.parent.gameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_REACHED, null, SendMessageOptions.DontRequireReceiver);
+            GameController.GameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_CHANGED, null, SendMessageOptions.DontRequireReceiver);
+            transform.parent.gameObject.BroadcastMessage(GameMessages.MSG_WAYPOINT_CHANGED, null, SendMessageOptions.DontRequireReceiver);
         }
         else
         // empty 

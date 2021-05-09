@@ -1,20 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ResultsState : GameState, IUIController
 {
     [SerializeField]
-    private GameStateHandle m_StartGameState;
+    private UIHandle m_ResultViewHandle = null;
 
     [SerializeField]
-    private UIHandle m_ResultViewHandle;
-
-    [SerializeField]
-    private InputActionAsset m_InputActions;
-
-    private InputAction m_ConfirmInput;
+    private InputActionAsset m_InputActions = null;
 
     public override void Enter()
     {
