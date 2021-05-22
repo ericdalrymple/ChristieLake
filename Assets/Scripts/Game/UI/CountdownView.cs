@@ -6,28 +6,24 @@ using UnityEngine;
 public class CountdownView : UIView<CountdownState>
 {
     [SerializeField]
-    private Animator m_Animator;
+    private Animator m_AnimationPrefab;
 
     [HideInInspector]
     public bool m_IsCountdownComplete = false;
 
+    private Animator m_AnimationInstance = null;
+
     public override void Tick()
     {
-        if (m_IsCountdownComplete)
+        if (m_AnimationInstance.GetCurrentAnimatorStateInfo(0).IsName("Done"))
         {
             GetController().OnCountdownComplete();
-            m_IsCountdownComplete = false;
+            DestroyImmediate(m_AnimationInstance);
         }
     }
 
     protected override void OnShown()
     {
-        m_Animator.Rebind();
-        m_Animator.SetTrigger("StateEnter");
-    }
-
-    protected override void OnWillShow()
-    {
-        m_IsCountdownComplete = false;
+        m_AnimationInstance = Instantiate(m_AnimationPrefab, transform, false);
     }
 }
