@@ -108,6 +108,11 @@ public class CanoeController : MonoBehaviour
     }
     public void OnRowLeft(InputAction.CallbackContext context)
     {
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
         //print("Row Left");
         m_Body.AddForce(m_Speed.Value * transform.forward);
         m_Body.AddForce(0.2f * m_Speed.Value * transform.right);
@@ -116,6 +121,11 @@ public class CanoeController : MonoBehaviour
 
     public void OnRowRight(InputAction.CallbackContext context)
     {
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
         //print("Row Right");
         m_Body.AddForce(m_Speed.Value * transform.forward);
         m_Body.AddForce(0.2f * m_Speed.Value * transform.right * -1);
@@ -124,6 +134,11 @@ public class CanoeController : MonoBehaviour
 
     public void OnRowForward(InputAction.CallbackContext context)
     {
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
         StartCoroutine(Row(m_IsPaddleOnRightSide));
         //m_RowAnimation.Play();
         //Debug.Log("Row Forward " + ( right ? "Right" : "Left"));
@@ -134,6 +149,11 @@ public class CanoeController : MonoBehaviour
 
     public void OnRowBackward(InputAction.CallbackContext context)
     {
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
         StartCoroutine(Row(m_IsPaddleOnRightSide));
         //m_RowAnimation.Play();
         //Debug.Log("Row Forward " + (right ? "Right" : "Left"));
@@ -145,7 +165,11 @@ public class CanoeController : MonoBehaviour
 
     public void OnSwitchSides(InputAction.CallbackContext context)
     {
-        
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
         m_IsPaddleOnRightSide = !m_IsPaddleOnRightSide;
         StartCoroutine(Row(m_IsPaddleOnRightSide));
         Debug.Log("Switch to " + (m_IsPaddleOnRightSide ? "Right" : "Left"));

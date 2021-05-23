@@ -8,6 +8,11 @@ public class CountdownState : GameState, IUIController
     [SerializeField]
     private UIHandle m_CountdownView;
 
+    public override bool AllowGameplayInput
+    {
+        get { return false; }
+    }
+
     public override void Enter()
     {
         GameController.UIManager.ShowDialog(m_CountdownView, this);

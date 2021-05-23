@@ -42,6 +42,11 @@ public class GameController
         get { return Instance?.m_GameTitle.Value; }
     }
 
+    public static bool GameplayInputEnabled
+    {
+        get { return Instance ? (Instance.m_StateMachine ? Instance.m_StateMachine.GameplayInputEnabled : true) : true; }
+    }
+
     public int CurrentScore
     {
         get { return m_Session.CurrentScore; }

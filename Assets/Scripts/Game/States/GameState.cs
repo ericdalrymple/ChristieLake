@@ -10,6 +10,11 @@ public abstract class GameState : MonoBehaviour
         get { return m_Handle != null ? m_Handle.Value : string.Empty; }
     }
 
+    public virtual bool AllowGameplayInput
+    {
+        get { return true; }
+    }
+
     protected GameStateMachine StateMachine
     {
         get;

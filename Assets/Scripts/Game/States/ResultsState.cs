@@ -9,6 +9,11 @@ public class ResultsState : GameState, IUIController
     [SerializeField]
     private InputActionAsset m_InputActions = null;
 
+    public override bool AllowGameplayInput
+    {
+        get { return false; }
+    }
+
     public override void Enter()
     {
         GameController.UIManager.ShowDialog(m_ResultViewHandle, GameController.Instance);

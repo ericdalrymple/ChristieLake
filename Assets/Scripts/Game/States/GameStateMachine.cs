@@ -14,6 +14,14 @@ public class GameStateMachine : SingletonBehaviour<GameStateMachine>
 
     protected GameState m_CurrentState;
 
+    public bool GameplayInputEnabled
+    {
+        get
+        {
+            return m_CurrentState ? m_CurrentState.AllowGameplayInput : true;
+        }
+    }
+
     public void Add(GameStateHandle handle, GameState state)
     {
         if (handle != null)

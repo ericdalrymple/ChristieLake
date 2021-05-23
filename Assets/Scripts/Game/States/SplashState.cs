@@ -12,6 +12,11 @@ public class SplashState : GameState, IUIController
     [SerializeField]
     private InputActionAsset m_InputActions = null;
 
+    public override bool AllowGameplayInput
+    {
+        get { return false; }
+    }
+
     public string GameTitle
     {
         get
