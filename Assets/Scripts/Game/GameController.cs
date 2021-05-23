@@ -16,6 +16,8 @@ public class GameController
     [SerializeField]
     private StringReference m_GameTitle = new StringReference();
 
+    private bool m_InitialLaunch = true;
+
     private Camera m_Camera;
     private CanoeController m_Player;
     private GameSession m_Session;
@@ -23,7 +25,6 @@ public class GameController
     private UIManager m_UIManager;
     private UIViewCollection m_ViewCollection;
     private Waypoints m_WaypointManager;
-
 
     public static GameObject GameObject
     {
@@ -121,6 +122,7 @@ public class GameController
 
     public void ResetGame()
     {
+        m_InitialLaunch = false;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
@@ -149,7 +151,10 @@ public class GameController
         m_Session.ResetValues();
 
         // Reset the game state
-        m_StateMachine.StartRetry();
+        if (!m_InitialLaunch)
+        {
+            m_StateMachine.StartRetry();
+        }
     }
 
     void OnWaypointChanged()
