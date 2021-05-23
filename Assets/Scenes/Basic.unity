@@ -2339,10 +2339,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SplashScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 9177476369250306231, guid: 33f3b3ad28ac35c4c93c5cbbc7b24ad8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33f3b3ad28ac35c4c93c5cbbc7b24ad8, type: 3}
 --- !u!224 &1931458391 stripped
