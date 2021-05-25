@@ -3,10 +3,10 @@ using UnityEngine;
 public class CountdownState : GameState, IUIController
 {
     [SerializeField]
-    private GameStateHandle m_GoState;
+    private GameStateHandle m_GoState = null;
 
     [SerializeField]
-    private UIHandle m_CountdownView;
+    private UIHandle m_CountdownView = null;
 
     public override bool AllowGameplayInput
     {

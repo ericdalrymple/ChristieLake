@@ -14,10 +14,10 @@ public class Waypoint : MonoBehaviour
     }
 
     [SerializeField]
-    private Transform m_MeshTransform;
+    private Transform m_MeshTransform = null;
 
     [SerializeField]
-    private WaypointScaling m_Scaling;
+    private WaypointScaling m_Scaling = new WaypointScaling();
 
     private Animator m_BobAnimator;
 

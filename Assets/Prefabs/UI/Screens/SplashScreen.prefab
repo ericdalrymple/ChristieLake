@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 9177476369624034734}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.3}
-  m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: -890, y: -20}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0.3}
+  m_AnchoredPosition: {x: 0, y: 5}
+  m_SizeDelta: {x: 295, y: -5}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &872288411
 CanvasRenderer:
@@ -67,20 +67,22 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<align=center><b>INSTRUCTIONS</b></align=center>
 
-
-    <b>Any Key</b>
-    ------------------ Start Game
+    <b>Any Key</b> ------------------
+    Start Game
 
 
     <b>Mouse Left</b> -------------- Row Forward
 
-    <b>Mouse
-    Right</b> ------------- Row Backward
+    <b>Mouse Right</b>
+    ------------- Row Backward
 
-    <b>Mouse Center / Space</b> - Switch
-    Sides
+    <b>Mouse Center / Space</b> - Switch Sides
 
-    <b>''N'' Key</b> -------------------- Swap Canoe'
+    <b>N
+    Key</b> --------------------- Swap Canoe
+
+    <b>R Key</b> ---------------------
+    Retry'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be36e67138ffbfb4bbd84f3995f70d15, type: 2}
   m_sharedMaterial: {fileID: 1078232013329636393, guid: be36e67138ffbfb4bbd84f3995f70d15, type: 2}
@@ -107,15 +109,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -289,7 +291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7a0b25e576cd74841b81f28e2bb0c1f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f4b6f2c46c9e9442ba4f6fadcb987ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

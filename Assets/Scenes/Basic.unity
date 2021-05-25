@@ -2452,10 +2452,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 8319245798526502738, guid: b85751ccc6550284a98bf45444321c58, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b85751ccc6550284a98bf45444321c58, type: 3}
 --- !u!114 &1977582806 stripped
@@ -2797,6 +2793,10 @@ PrefabInstance:
     - target: {fileID: 8718629639563109087, guid: e314133135e7f4545add59a7b10a5cf8, type: 3}
       propertyPath: m_Name
       value: Countdown
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718629639563109087, guid: e314133135e7f4545add59a7b10a5cf8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e314133135e7f4545add59a7b10a5cf8, type: 3}

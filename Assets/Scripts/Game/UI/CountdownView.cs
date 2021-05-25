@@ -6,7 +6,7 @@ using UnityEngine;
 public class CountdownView : UIView<CountdownState>
 {
     [SerializeField]
-    private Animator m_AnimationPrefab;
+    private Animator m_AnimationPrefab = null;
 
     [HideInInspector]
     public bool m_IsCountdownComplete = false;

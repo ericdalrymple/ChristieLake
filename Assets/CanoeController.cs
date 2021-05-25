@@ -24,6 +24,7 @@ public class CanoeController : MonoBehaviour
     [SerializeField]
     private GameObject m_PaddleRight = null;
 
+    private InputAction m_Retry;
     private InputAction m_RowLeft;
     private InputAction m_RowRight;
     private InputAction m_RowForward;
@@ -48,6 +49,8 @@ public class CanoeController : MonoBehaviour
 
         InputActionMap gameplayActionMap = m_InputActionAsset.FindActionMap("Player");
 
+        m_Retry = gameplayActionMap.FindAction("Retry");
+
         m_RowLeft = gameplayActionMap.FindAction("Row Left");
         m_RowRight = gameplayActionMap.FindAction("Row Right");
 
@@ -62,10 +65,13 @@ public class CanoeController : MonoBehaviour
 
         m_RowLeft.performed += OnRowLeft;
         m_RowRight.performed += OnRowRight;
+
+        m_Retry.performed += OnRetry;
     }
 
     private void OnEnable()
     {
+        m_Retry.Enable();
         m_RowLeft.Enable();
         m_RowRight.Enable();
         m_RowForward.Enable();
@@ -76,6 +82,7 @@ public class CanoeController : MonoBehaviour
 
     private void OnDisable()
     {
+        m_Retry.Disable();
         m_RowLeft.Disable();
         m_RowRight.Disable();
         m_RowForward.Disable();
@@ -85,6 +92,8 @@ public class CanoeController : MonoBehaviour
 
     private void OnDestroy()
     {
+        m_Retry.performed -= OnRetry;
+
         m_RowLeft.performed -= OnRowLeft;
         m_RowRight.performed -= OnRowRight;
 
@@ -106,6 +115,17 @@ public class CanoeController : MonoBehaviour
         return Vector3.Dot(transform.up, Vector3.up) < -.9;
 
     }
+
+    public void OnRetry(InputAction.CallbackContext context)
+    {
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
+        GameController.Instance.ResetGame();
+    }
+
     public void OnRowLeft(InputAction.CallbackContext context)
     {
         if (!GameController.GameplayInputEnabled)
