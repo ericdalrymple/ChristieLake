@@ -204,6 +204,11 @@ public class CanoeController : MonoBehaviour
 
     public void OnWin(InputAction.CallbackContext context)
     {
+        if (!GameController.GameplayInputEnabled)
+        {
+            return;
+        }
+
         GameController.Instance.gameObject.BroadcastMessage(GameMessages.MSG_RACE_FINISHED, SendMessageOptions.DontRequireReceiver);
     }
 
