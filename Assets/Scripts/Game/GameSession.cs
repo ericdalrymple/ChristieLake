@@ -74,6 +74,16 @@ public class GameSession : MonoBehaviour
         }
     }
 
+    private float MotivationPercent
+    {
+        get
+        {
+            return (m_MaxMotivation.Value == 0) ?
+                0 :
+                Motivation / (float)m_MaxMotivation.Value;
+        }
+    }
+
     private float Score
     {
         get { return m_Score; }
@@ -113,7 +123,7 @@ public class GameSession : MonoBehaviour
 
     public void ResetValues()
     {
-        Motivation = 0.0f;
+        Motivation = m_MaxMotivation.Value;
         Score = 0.0f;
         StartTime = 0.0f;
         LastTime = 0.0f;
@@ -151,16 +161,14 @@ public class GameSession : MonoBehaviour
     {
         m_TrackTime = false;
 
+        // Score the buoy
+        Score += (int)(m_BuoyScore.Value * (1.0f + MotivationPercent));
     }
 
     public void OnWaypointChanged()
     {
-        float motivationPercent = (m_MaxMotivation.Value == 0) ?
-            0 :
-            Motivation / (float)m_MaxMotivation.Value;
-
         // Score the buoy
-        Score += (int)(m_BuoyScore.Value * (1.0f + motivationPercent));
+        Score += (int)(m_BuoyScore.Value * (1.0f + MotivationPercent));
 
         // Fill up motivation
         Motivation = m_MaxMotivation.Value;
