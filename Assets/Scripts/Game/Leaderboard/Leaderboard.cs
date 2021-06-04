@@ -70,49 +70,15 @@ public class Leaderboard
         m_Status = LeaderboardStatus.Retrieving;
 
         // TODO: Fetch scores.
-        Guid dummy = Guid.NewGuid();
-        string dummyString = dummy.ToString();
-        string[] scores = new string[]
-        {
-            $"AAA|{dummyString}", "1000",
-            $"AAB|{dummyString}", "1000",
-            $"AAC|{dummyString}", "1000",
-            $"AAD|{dummyString}", "1000",
-            $"AAE|{dummyString}", "1000",
-            $"AAF|{dummyString}", "1000",
-            $"AAG|{dummyString}", "1000",
-            $"AAH|{dummyString}", "1000",
-            $"AAI|{dummyString}", "1000",
-            $"AAJ|{dummyString}", "1000",
-            $"AAK|{dummyString}", "1000",
-            $"AAL|{dummyString}", "1000",
-            $"AAN|{dummyString}", "1000",
-            $"AAO|{dummyString}", "1000",
-            $"AAP|{dummyString}", "1000",
-            $"AAQ|{dummyString}", "1000",
-            $"AAR|{dummyString}", "1000",
-            $"AAS|{dummyString}", "1000",
-            $"AAT|{dummyString}", "1000",
-            $"AAU|{dummyString}", "1000",
-            $"AAV|{dummyString}", "1000",
-            $"AAW|{dummyString}", "1000",
-            $"AAX|{dummyString}", "1000",
-            $"AAY|{dummyString}", "1000",
-            $"AAZ|{dummyString}", "1000",
-            $"ABA|{dummyString}", "1000",
-            $"ABB|{dummyString}", "1000",
-            $"AAM|{LatestScore.Guid.ToString("D")}", "1000",
-        };
 
-        //yield return null;
 
         // Repopulate local leaderboard scores
-        m_Scores.Clear();
+        /* m_Scores.Clear();
         for (int i = 0; i < scores.Length; i += 2)
         {
             LeaderboardScore score = new LeaderboardScore(scores[i], scores[i + 1]);
             m_Scores.Add(score);
-        }
+        }*/
 
         // Update status
         m_Status = LeaderboardStatus.Ready;
@@ -133,6 +99,7 @@ public class Leaderboard
         LatestScore = new LeaderboardScore(name, score);
 
         // TODO: Submit score to table.
+        m_Scores.Add(LatestScore);
 
         InnerRetrieve();
     }

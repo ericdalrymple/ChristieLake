@@ -43,7 +43,7 @@ public class LeaderboardScore : IComparable<LeaderboardScore>
     public int CompareTo(LeaderboardScore other)
     {
         // Compare first by score
-        int scoreCompare = Math.Sign(Value - other.Value);
+        int scoreCompare = Math.Sign(other.Value - Value);
         if (scoreCompare != 0)
         {
             return scoreCompare;

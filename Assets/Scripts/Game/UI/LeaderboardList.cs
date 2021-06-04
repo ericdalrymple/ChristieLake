@@ -54,8 +54,15 @@ public class LeaderboardList : MonoBehaviour
 
             if (isCurrentScore)
             {
-                // Track the position of the entry for the current score
-                currentScorePosition = contentHeight + (entryIndex / (entryCount - 1)) * entryHeight;
+                if (entryCount > 1)
+                {
+                    // Track the position of the entry for the current score
+                    currentScorePosition = contentHeight + (entryIndex / (entryCount - 1)) * entryHeight;
+                }
+                else
+                {
+                    currentScorePosition = 0.0f;
+                }
             }
 
             contentHeight += entryHeight;
