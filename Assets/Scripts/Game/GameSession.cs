@@ -21,6 +21,7 @@ public class GameSession : MonoBehaviour
     private float m_Score;
     private float m_SessionStartTime;
     private bool m_TrackTime = false;
+    private string m_PlayerName = string.Empty;
 
     private GameController m_Controller;
 
@@ -32,6 +33,15 @@ public class GameSession : MonoBehaviour
     public int CurrentMotivation
     {
         get { return (int)m_Motivation; }
+    }
+
+    public string CurrentPlayerName
+    {
+        get { return m_PlayerName; }
+        set
+        {
+            m_PlayerName = value;
+        }
     }
 
     public int CurrentScore

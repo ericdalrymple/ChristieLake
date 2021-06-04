@@ -1,20 +1,35 @@
 using PocketValues.Types;
 using System;
+using TeamDev.Redis;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions;
+
+[Serializable]
+public struct RedisConfiguration
+{
+    public string m_Host;
+    public int m_Port;
+    public string m_Username;
+    public string m_Password;
+    public string m_Database;
+}
 
 [RequireComponent(typeof(UIManager))]
 [RequireComponent(typeof(GameSession))]
 public class GameController
     : SingletonBehaviour<GameController>
     , IHudController
-    , IResultsController
 {
     [Header("Config")]
 
     [SerializeField]
     private StringReference m_GameTitle = new StringReference();
+
+    [Header("Connection")]
+
+    [SerializeField]
+    private RedisConfiguration m_RedisConfig = new RedisConfiguration();
 
     private bool m_InitialLaunch = true;
 
@@ -25,6 +40,7 @@ public class GameController
     private UIManager m_UIManager;
     private UIViewCollection m_ViewCollection;
     private Waypoints m_WaypointManager;
+    private RedisDataAccessProvider m_Redis = new RedisDataAccessProvider();
 
     public static GameObject GameObject
     {
@@ -46,6 +62,18 @@ public class GameController
     public static bool GameplayInputEnabled
     {
         get { return Instance ? (Instance.m_StateMachine ? Instance.m_StateMachine.GameplayInputEnabled : true) : true; }
+    }
+
+    public Leaderboard GlobalLeaderboard
+    {
+        get;
+        private set;
+    }
+
+    public string CurrentName
+    {
+        get { return m_Session.CurrentPlayerName; }
+        set { m_Session.CurrentPlayerName = value; }
     }
 
     public int CurrentScore
@@ -89,6 +117,21 @@ public class GameController
     public TimeSpan TimeElapsed
     {
         get { return m_Session.ElapsedTime; }
+    }
+
+    private TeamDev.Redis.LanguageItems.Configuration RedisConfig
+    {
+        get
+        {
+            TeamDev.Redis.LanguageItems.Configuration config = new TeamDev.Redis.LanguageItems.Configuration();
+            config.DataBase = m_RedisConfig.m_Database;
+            config.Host = m_RedisConfig.m_Host;
+            config.Port = m_RedisConfig.m_Port;
+            config.UserName = m_RedisConfig.m_Username;
+            config.Password = m_RedisConfig.m_Password;
+
+            return config;
+        }
     }
 
     public GameObject GetPlayer()
@@ -178,6 +221,9 @@ public class GameController
         // Load scenes
         SceneManager.LoadScene(1, LoadSceneMode.Additive);
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
+
+        // Initialize leaderboard
+        GlobalLeaderboard = new Leaderboard();
 
         // Cache scenes
         //m_RaceScene = SceneManager.GetSceneByName("Basic");

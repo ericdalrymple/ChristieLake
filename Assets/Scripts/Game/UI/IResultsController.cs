@@ -11,4 +11,7 @@ public interface IResultsController : IUIController
     {
         get;
     }
+
+    public void GoToRetry();
+    public void GoToSubmit();
 }

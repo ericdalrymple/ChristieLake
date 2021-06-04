@@ -138,6 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Handle: {fileID: 11400000, guid: 113c38b9411a3954f8100565a6600929, type: 2}
   m_ResultViewHandle: {fileID: 11400000, guid: 31f4444a167362a489bb6b41dc2a9790, type: 2}
+  m_PlayerNameViewHandle: {fileID: 11400000, guid: a2a3cb611ff92ea47b270b9f16ab3ab9, type: 2}
+  m_LeaderboardState: {fileID: 11400000, guid: 21b9707552b73b5419623c7944af38ab, type: 2}
   m_InputActions: {fileID: -944628639613478452, guid: 0f4423cd2e8a44b428a457613fe9e340, type: 3}
 --- !u!1 &3359956600228411204
 GameObject:
@@ -174,6 +176,7 @@ Transform:
   - {fileID: 3107046922370568511}
   - {fileID: 568913178708708296}
   - {fileID: 3757168426810343004}
+  - {fileID: 7362850559556732775}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,6 +196,12 @@ MonoBehaviour:
     useConstant: 0
     constant: 
     variable: {fileID: 11400000, guid: 52bc04fbadfb3cd498ef0991ee8c6bc3, type: 2}
+  m_RedisConfig:
+    m_Host: paddlrleaderboard.nppjrn.ng.0001.use1.cache.amazonaws.com
+    m_Port: 6379
+    m_Username: paddlr-client
+    m_Password: M1m^0X3K$pv2w6OF
+    m_Database: paddlrleaderboard
 --- !u!114 &3250793203473878885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,3 +299,49 @@ MonoBehaviour:
   m_WinState: {fileID: 11400000, guid: 113c38b9411a3954f8100565a6600929, type: 2}
   m_LoseState: {fileID: 11400000, guid: 9786b8a95e1a0e441a76bee8da972ce2, type: 2}
   m_HudHandle: {fileID: 11400000, guid: cd586effe668392469d10abe257a5ec5, type: 2}
+--- !u!1 &6710287283492056153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7362850559556732775}
+  - component: {fileID: 5242456786577219662}
+  m_Layer: 0
+  m_Name: LeaderboardState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7362850559556732775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710287283492056153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3359956600228411206}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5242456786577219662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6710287283492056153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 142938d35eb96564f85441cf1a90beda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Handle: {fileID: 11400000, guid: 21b9707552b73b5419623c7944af38ab, type: 2}
+  m_LeaderboardViewHandle: {fileID: 11400000, guid: 0feb13d9a7b4c0649aab762ff88d9faa, type: 2}
+  m_LoadingViewHandle: {fileID: 11400000, guid: 0feb13d9a7b4c0649aab762ff88d9faa, type: 2}

@@ -21,7 +21,7 @@ public abstract class GameState : MonoBehaviour
         private set;
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         StateMachine = GetComponentInParent<GameStateMachine>();
     }

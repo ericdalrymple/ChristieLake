@@ -1,13 +1,30 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ResultsState : GameState, IUIController
+public class ResultsState : GameState, IResultsController
 {
     [SerializeField]
     private UIHandle m_ResultViewHandle = null;
 
     [SerializeField]
+    private UIHandle m_PlayerNameViewHandle = null;
+
+    [SerializeField]
+    private GameStateHandle m_LeaderboardState = null;
+
+    [SerializeField]
     private InputActionAsset m_InputActions = null;
+
+    public int CurrentScore
+    {
+        get { return GameController.Instance.CurrentScore; }
+    }
+
+    public TimeSpan TimeElapsed
+    {
+        get { return GameController.Instance.TimeElapsed; }
+    }
 
     public override bool AllowGameplayInput
     {
@@ -16,52 +33,27 @@ public class ResultsState : GameState, IUIController
 
     public override void Enter()
     {
-        GameController.UIManager.ShowDialog(m_ResultViewHandle, GameController.Instance);
-
-        // Bind confirm to all keys
-        InputActionMap gameplayActionMap = m_InputActions.FindActionMap("UI");
-        foreach (InputAction action in gameplayActionMap.actions)
-        {
-            if (action.type == InputActionType.Button)
-            {
-                action.performed += OnConfirmInput;
-            }
-        }
-
-        gameplayActionMap = m_InputActions.FindActionMap("Player");
-        foreach (InputAction action in gameplayActionMap.actions)
-        {
-            if (action.type == InputActionType.Button)
-            {
-                action.performed += OnConfirmInput;
-            }
-        }
+        GameController.UIManager.ShowDialog(m_ResultViewHandle, this);
     }
 
     public override void Exit()
     {
-        // Unbind confirm from all keys
-        InputActionMap gameplayActionMap = m_InputActions.FindActionMap("UI");
-        foreach (InputAction action in gameplayActionMap.actions)
-        {
-            if (action.type == InputActionType.Button)
-            {
-                action.performed -= OnConfirmInput;
-            }
-        }
-
-        gameplayActionMap = m_InputActions.FindActionMap("Player");
-        foreach (InputAction action in gameplayActionMap.actions)
-        {
-            if (action.type == InputActionType.Button)
-            {
-                action.performed -= OnConfirmInput;
-            }
-        }
+        GameController.UIManager.ClearViews();
     }
 
-    public void OnConfirmInput(InputAction.CallbackContext context)
+    public void SubmitScoreWithName(string name)
+    {
+        GameController.Instance.CurrentName = name;
+        StateMachine.SetCurrentState(m_LeaderboardState);
+    }
+
+    public void GoToRetry()
     {
         GameController.Instance.ResetGame();
+    }
+
+    public void GoToSubmit()
+    {
+        GameController.UIManager.ShowDialog(m_PlayerNameViewHandle, this);
     }
 }

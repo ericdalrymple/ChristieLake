@@ -10,6 +10,16 @@ public class ResultsView : UIView<IResultsController>
     [SerializeField]
     private TMP_Text m_TimeLabel = null;
 
+    public void OnSubmitButtonClicked()
+    {
+        GetController().GoToSubmit();
+    }
+
+    public void OnRetryButtonClicked()
+    {
+        GetController().GoToRetry();
+    }
+
     protected override void OnWillShow()
     {
         m_ScoreLabel.SetText(GetController().CurrentScore.ToString("N0"));
