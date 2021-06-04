@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LeaderboardView : UIView<LeaderboardState>
@@ -10,12 +11,7 @@ public class LeaderboardView : UIView<LeaderboardState>
 
     public void OnLeaderboardUpdated()
     {
-        Leaderboard leaderboard = GetController().CurrentLeaderboard;
-
-        m_List.SetContent(
-            leaderboard,
-            m_DisplayLimit,
-            leaderboard.LatestScore.Guid);
+        StartCoroutine(UpdateList());
     }
 
     public void OnRestartButtonClicked()
@@ -31,5 +27,22 @@ public class LeaderboardView : UIView<LeaderboardState>
     protected override void OnWillHide()
     {
         //GetController().OnLeaderboardChanged -= OnLeaderboardUpdated;
+    }
+
+    private IEnumerator UpdateList()
+    {
+        while (m_List == null || !m_List.isActiveAndEnabled)
+        {
+            yield return null;
+        }
+
+        yield return null;
+
+        Leaderboard leaderboard = GetController().CurrentLeaderboard;
+
+        m_List.SetContent(
+            leaderboard,
+            m_DisplayLimit,
+            leaderboard.LatestScore.Guid);
     }
 }

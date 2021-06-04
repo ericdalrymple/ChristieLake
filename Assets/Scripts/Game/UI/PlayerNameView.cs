@@ -21,15 +21,6 @@ public class PlayerNameView : UIView<ResultsState>
     {
         m_Name = CorrectName(m_NameText.text);
         m_NameText.SetTextWithoutNotify(m_Name);
-
-        if (m_Name.Length < m_NameText.characterLimit)
-        {
-            m_SubmitButton.interactable = false;
-        }
-        else
-        {
-            m_SubmitButton.interactable = true;
-        }
     }
 
     public void OnSubmitClicked()
@@ -45,15 +36,6 @@ public class PlayerNameView : UIView<ResultsState>
     protected override void OnWillShow()
     {
         m_NameText.SetTextWithoutNotify(m_Name);
-
-        if (m_Name.Length < m_NameText.characterLimit)
-        {
-            m_SubmitButton.interactable = false;
-        }
-        else
-        {
-            m_SubmitButton.interactable = true;
-        }
     }
 
     protected override void OnShown()
@@ -66,7 +48,7 @@ public class PlayerNameView : UIView<ResultsState>
         string corrected = name.ToUpper();
         foreach (char c in corrected)
         {
-            if ((c < 'a' && c > 'z') || (c < 'A' && c > 'Z'))
+            if (c < 'A' && c > 'Z')
             {
                 // Invalid character
                 return m_Name;

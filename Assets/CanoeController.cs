@@ -30,6 +30,7 @@ public class CanoeController : MonoBehaviour
     private InputAction m_RowForward;
     private InputAction m_RowBackward;
     private InputAction m_SwitchSides;
+    private InputAction m_Win;
 
     private bool m_IsPaddleOnRightSide = true;
     private Rigidbody m_Body;
@@ -59,6 +60,8 @@ public class CanoeController : MonoBehaviour
 
         m_SwitchSides = gameplayActionMap.FindAction("Switch Sides");
 
+        m_Win = gameplayActionMap.FindAction("Win");
+
         m_RowForward.performed += OnRowForward;
         m_RowBackward.performed += OnRowBackward;
         m_SwitchSides.performed += OnSwitchSides;
@@ -67,21 +70,23 @@ public class CanoeController : MonoBehaviour
         m_RowRight.performed += OnRowRight;
 
         m_Retry.performed += OnRetry;
+        m_Win.performed += OnWin;
     }
 
     private void OnEnable()
     {
+        m_Win.Enable();
         m_Retry.Enable();
         m_RowLeft.Enable();
         m_RowRight.Enable();
         m_RowForward.Enable();
         m_RowBackward.Enable();
         m_SwitchSides.Enable();
-
     }
 
     private void OnDisable()
     {
+        m_Win.Disable();
         m_Retry.Disable();
         m_RowLeft.Disable();
         m_RowRight.Disable();
@@ -100,6 +105,8 @@ public class CanoeController : MonoBehaviour
         m_RowForward.performed -= OnRowForward;
         m_RowBackward.performed -= OnRowBackward;
         m_SwitchSides.performed -= OnSwitchSides;
+
+        m_Win.performed -= OnWin;
     }
 
     // Update is called once per frame
@@ -193,6 +200,11 @@ public class CanoeController : MonoBehaviour
         m_IsPaddleOnRightSide = !m_IsPaddleOnRightSide;
         StartCoroutine(Row(m_IsPaddleOnRightSide));
         Debug.Log("Switch to " + (m_IsPaddleOnRightSide ? "Right" : "Left"));
+    }
+
+    public void OnWin(InputAction.CallbackContext context)
+    {
+        GameController.Instance.gameObject.BroadcastMessage(GameMessages.MSG_RACE_FINISHED, SendMessageOptions.DontRequireReceiver);
     }
 
     public IEnumerator Row(bool right)

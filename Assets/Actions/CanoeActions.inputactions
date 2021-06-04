@@ -76,6 +76,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Win",
+                    "type": "Button",
+                    "id": "1aae054d-647b-4971-a863-1a7610937f31",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -274,6 +282,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Retry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "61e82bfd-19c7-489d-b087-d979bf438b81",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Win",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
