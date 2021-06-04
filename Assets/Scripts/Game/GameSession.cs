@@ -150,6 +150,7 @@ public class GameSession : MonoBehaviour
     public void OnFinishRace()
     {
         m_TrackTime = false;
+
     }
 
     public void OnWaypointChanged()
