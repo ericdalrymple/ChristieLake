@@ -1,0 +1,74 @@
+warning: LF will be replaced by CRLF in Assets/Prefabs/Race/Waypoint.prefab.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in Assets/Scenes/Basic.unity.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in Assets/Scenes/Props.unity.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in Assets/Scenes/TerrainSmall.unity.
+The file will have its original line endings in your working directory
+[1mdiff --git a/Assets/Prefabs/Race/Waypoint.prefab b/Assets/Prefabs/Race/Waypoint.prefab[m
+[1mindex e3486f6..0cc1842 100644[m
+[1m--- a/Assets/Prefabs/Race/Waypoint.prefab[m
+[1m+++ b/Assets/Prefabs/Race/Waypoint.prefab[m
+[36m@@ -11,6 +11,7 @@[m [mGameObject:[m
+   - component: {fileID: 5904473251320044789}[m
+   - component: {fileID: 5904473251320044788}[m
+   - component: {fileID: 7617593311079072044}[m
+[32m+[m[32m  - component: {fileID: 1062961011754280588}[m
+   m_Layer: 0[m
+   m_Name: Waypoint[m
+   m_TagString: Untagged[m
+[36m@@ -59,6 +60,25 @@[m [mMonoBehaviour:[m
+   m_Script: {fileID: 11500000, guid: 0ab7549de1664a34094733e0774a324f, type: 3}[m
+   m_Name: [m
+   m_EditorClassIdentifier: [m
+[32m+[m[32m--- !u!95 &1062961011754280588[m
+[32m+[m[32mAnimator:[m
+[32m+[m[32m  serializedVersion: 3[m
+[32m+[m[32m  m_ObjectHideFlags: 0[m
+[32m+[m[32m  m_CorrespondingSourceObject: {fileID: 0}[m
+[32m+[m[32m  m_PrefabInstance: {fileID: 0}[m
+[32m+[m[32m  m_PrefabAsset: {fileID: 0}[m
+[32m+[m[32m  m_GameObject: {fileID: 5904473251320044790}[m
+[32m+[m[32m  m_Enabled: 1[m
+[32m+[m[32m  m_Avatar: {fileID: 0}[m
+[32m+[m[32m  m_Controller: {fileID: 9100000, guid: edeb0a5908197d94ba093549051ed19d, type: 2}[m
+[32m+[m[32m  m_CullingMode: 0[m
+[32m+[m[32m  m_UpdateMode: 0[m
+[32m+[m[32m  m_ApplyRootMotion: 0[m
+[32m+[m[32m  m_LinearVelocityBlending: 0[m
+[32m+[m[32m  m_WarningMessage:[m[41m [m
+[32m+[m[32m  m_HasTransformHierarchy: 1[m
+[32m+[m[32m  m_AllowConstantClipSamplingOptimization: 1[m
+[32m+[m[32m  m_KeepAnimatorControllerStateOnDisable: 0[m
+ --- !u!1001 &3289500443447174799[m
+ PrefabInstance:[m
+   m_ObjectHideFlags: 0[m
+[1mdiff --git a/Assets/Waypoint.cs b/Assets/Waypoint.cs[m
+[1mindex a71684b..29edcdd 100644[m
+[1m--- a/Assets/Waypoint.cs[m
+[1m+++ b/Assets/Waypoint.cs[m
+[36m@@ -7,14 +7,22 @@[m [mpublic class Waypoint : MonoBehaviour[m
+     private Collider closeEnough;[m
+     private Waypoints course;[m
+ [m
+[32m+[m[32m    private Animator m_BobAnimator;[m
+[32m+[m
+     // Start is called before the first frame update[m
+     void Start()[m
+     {[m
+         closeEnough = GetComponent<Collider>();[m
+[32m+[m
+[32m+[m[32m        m_BobAnimator = GetComponent<Animator>();[m
+[32m+[m[32m        m_BobAnimator.Play("WaypointBob");[m
+[32m+[m
+         //Debug.Log("Trigger on");[m
+[31m-        transform.rotation = Random.rotation;[m
+[32m+[m[32m        // optionally, rotate buoy model[m
+[32m+[m[32m        //transform.rotation = Random.rotation;[m
+     }[m
+ [m
+[32m+[m
+     private void OnTriggerEnter(Collider other)[m
+     {[m
+         Debug.Log("Waypoint reached!");[m
